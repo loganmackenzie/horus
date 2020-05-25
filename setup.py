@@ -4,7 +4,7 @@ import os
 import sys
 from setuptools import setup, find_packages
 
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), "src"))
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'src))
 from horus import __version__
 
 
@@ -30,7 +30,7 @@ setup(
     description='Horus is a full software solution for 3D scanning',
 
     license='GPLv2',
-    keywords="horus ciclop scanning 3d",
+    keywords='horus ciclop scanning 3d',
     url='https://github.com/bqlabs/horus',
 
     packages=find_packages('src'),
