@@ -29,15 +29,9 @@ class ScanningWorkbench(Workbench):
         self.toolbar_scan = toolbar_scan
 
         # Elements
-        self.play_tool = self.toolbar_scan.AddLabelTool(
-            wx.NewId(), _('Play'),
-            wx.Bitmap(resources.get_path_for_image('play.png')), shortHelp=_('Play'))
-        self.stop_tool = self.toolbar_scan.AddLabelTool(
-            wx.NewId(), _('Stop'),
-            wx.Bitmap(resources.get_path_for_image('stop.png')), shortHelp=_('Stop'))
-        self.pause_tool = self.toolbar_scan.AddLabelTool(
-            wx.NewId(), _('Pause'),
-            wx.Bitmap(resources.get_path_for_image('pause.png')), shortHelp=_('Pause'))
+        self.play_tool = self.toolbar_scan.AddTool(wx.NewId(), 'Play', wx.Bitmap(resources.get_path_for_image('play.png')), shortHelp='Play')
+        self.stop_tool = self.toolbar_scan.AddTool(wx.NewId(), 'Stop', wx.Bitmap(resources.get_path_for_image('stop.png')), shortHelp='Stop')
+        self.pause_tool = self.toolbar_scan.AddTool(wx.NewId(), 'Pause', wx.Bitmap(resources.get_path_for_image('pause.png')), shortHelp='Pause')
         self.toolbar_scan.Realize()
         self.toolbar_scan.GetParent().Layout()
 

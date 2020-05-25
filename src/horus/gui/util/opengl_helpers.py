@@ -321,7 +321,7 @@ def load_gl_texture(filename):
     glBindTexture(GL_TEXTURE_2D, tex)
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR)
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR)
-    img = wx.ImageFromBitmap(wx.Bitmap(get_path_for_image(filename)))
+    img = wx.Bitmap(get_path_for_image(filename)).ConvertToImage()
     rgb_data = img.GetData()
     alpha_data = img.GetAlphaBuffer()
     if alpha_data is not None:

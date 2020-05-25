@@ -111,7 +111,7 @@ class Camera(object):
                     self.controls = uvc.mac.Controls(device.uId)
         if self._capture is not None:
             self._capture.release()
-        self._capture = cv2.VideoCapture(self.camera_id)
+        self._capture = cv2.VideoCapture(self.camera_id, cv2.CAP_DSHOW)
         time.sleep(0.2)
         if not self._capture.isOpened():
             time.sleep(1)
@@ -136,6 +136,7 @@ class Camera(object):
                         tries += 1
                         if not self._reading:
                             self._capture.release()
+                    cv2.destroyAllWindows()
                 logger.info(' Done')
 
     def set_unplug_callback(self, value):
@@ -388,9 +389,10 @@ class Camera(object):
 
     def _count_cameras(self):
         for i in range(5):
-            cap = cv2.VideoCapture(i)
+            cap = cv2.VideoCapture(i, cv2.CAP_DSHOW)
             res = not cap.isOpened()
             cap.release()
+            cv2.destroyAllWindows()
             if res:
                 return i
         return 5

@@ -48,12 +48,8 @@ class ToolbarConnection(Toolbar):
         self.on_disconnect_callback = on_disconnect_callback
 
         # Elements
-        self.connect_tool = self.toolbar.AddLabelTool(
-            wx.NewId(), _('Connect'),
-            wx.Bitmap(resources.get_path_for_image('connect.png')), shortHelp=_('Connect'))
-        self.disconnect_tool = self.toolbar.AddLabelTool(
-            wx.NewId(), _('Disconnect'),
-            wx.Bitmap(resources.get_path_for_image('disconnect.png')), shortHelp=_('Disconnect'))
+        self.connect_tool = self.toolbar.AddTool(wx.NewId(), 'Connect', wx.Bitmap(resources.get_path_for_image('connect.png')), shortHelp='Connect')
+        self.disconnect_tool = self.toolbar.AddTool(wx.NewId(), 'Disconnect', wx.Bitmap(resources.get_path_for_image('disconnect.png')), shortHelp='Disconnect')
         self.toolbar.Realize()
 
         self._enable_tool(self.connect_tool, True)
