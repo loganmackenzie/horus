@@ -9,6 +9,7 @@ import gc
 import os
 import time
 import wx._core
+import wx.adv
 import datetime
 import webbrowser
 from collections import OrderedDict
@@ -469,7 +470,7 @@ class MainWindow(wx.Frame):
         gc.collect()
 
     def on_about(self, event):
-        info = wx.AboutDialogInfo()
+        info = wx.adv.AboutDialogInfo()
         icon = wx.Icon(resources.get_path_for_image('horus.ico'), wx.BITMAP_TYPE_ICO)
         info.SetIcon(icon)
         info.SetName('Horus')
@@ -498,7 +499,7 @@ class MainWindow(wx.Frame):
         info.AddTranslator('Jesús Arroyo, Irene Sanz, Alexandre Galode, Natasha da Silva, '
                            'Camille Montgolfier, Markus Hoedl, Andrea Fantini, Maria Albuquerque, '
                            'Meike Schirmeister')
-        wx.AboutBox(info)
+        wx.adv.AboutBox(info)
 
     def on_welcome(self, event):
         WelcomeDialog(self)
