@@ -18,8 +18,8 @@ try:
     import numpy
     import scipy
     import matplotlib
-except ImportError as e:
-    print(e.message)
+except ImportError as err:
+    print(err)
     exit(1)
 
 # Try first the sources

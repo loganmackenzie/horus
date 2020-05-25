@@ -37,7 +37,7 @@ class ImageView(wx.Panel):
         self.hide = False
 
     def on_show(self, event):
-        if event.GetShow():
+        if event.IsShown():
             self.GetParent().Layout()
             self.Layout()
 

@@ -31,37 +31,37 @@ class ExpandableCollection(wx.Panel):
         self.vbox.Add(panel, 0, wx.ALL ^ wx.TOP | wx.EXPAND, 3)
 
     def init_panels_layout(self):
-        values = self.expandable_panels.values()
+        values = list(self.expandable_panels.values())
         if len(values) > 0:
             self._expand_callback(values[0])
 
     def _expand_callback(self, selected_panel):
         if sys.is_windows():
             selected_panel.show_content()
-            for panel in self.expandable_panels.values():
+            for panel in list(self.expandable_panels.values()):
                 if panel is not selected_panel:
                     panel.hide_content()
         else:
-            for panel in self.expandable_panels.values():
+            for panel in list(self.expandable_panels.values()):
                 if panel is not selected_panel:
                     panel.hide_content()
             selected_panel.show_content()
 
     # Engine callbacks
     def update_callbacks(self):
-        for panel in self.expandable_panels.values():
+        for panel in list(self.expandable_panels.values()):
             panel.content.update_callbacks()
 
     def enable_content(self):
-        for panel in self.expandable_panels.values():
+        for panel in list(self.expandable_panels.values()):
             panel.content.Enable()
 
     def disable_content(self):
-        for panel in self.expandable_panels.values():
+        for panel in list(self.expandable_panels.values()):
             panel.content.Disable()
 
     def update_from_profile(self):
-        for panel in self.expandable_panels.values():
+        for panel in list(self.expandable_panels.values()):
             panel.enable_restore(True)
             panel.content.update_from_profile()
 
@@ -99,11 +99,9 @@ class ExpandablePanel(wx.Panel):
         self.hbox = wx.BoxSizer(wx.HORIZONTAL)
         self.hbox.Add(self.title_text, 1, wx.ALIGN_CENTER_VERTICAL)
         if self.has_undo:
-            self.hbox.Add(
-                self.undo_button, 0, wx.RIGHT | wx.BOTTOM | wx.ALIGN_RIGHT, 5)
+            self.hbox.Add(self.undo_button, 0, wx.RIGHT | wx.BOTTOM, 5)
         if self.has_restore:
-            self.hbox.Add(
-                self.restore_button, 0, wx.RIGHT | wx.BOTTOM | wx.ALIGN_RIGHT, 5)
+            self.hbox.Add(self.restore_button, 0, wx.RIGHT | wx.BOTTOM, 5)
         self.vbox.Add(self.hbox, 0, wx.TOP | wx.BOTTOM | wx.EXPAND, 5)
         self.vbox.Add(self.content, 1, wx.ALL ^ wx.TOP ^ wx.BOTTOM | wx.EXPAND, 15)
         self.SetSizer(self.vbox)
@@ -278,7 +276,7 @@ class ControlCollection(wx.Panel):
         self.control_panels[_name].set_engine_callback(_callback)
 
     def reset_profile(self):
-        for control in self.control_panels.values():
+        for control in list(self.control_panels.values()):
             control.reset_profile()
 
     def enable(self, _name):
@@ -288,7 +286,7 @@ class ControlCollection(wx.Panel):
         self.items[_name].Disable()
 
     def update_from_profile(self):
-        for control in self.control_panels.values():
+        for control in list(self.control_panels.values()):
             control.update_from_profile()
 
     def show_item(self, _name):
@@ -384,11 +382,11 @@ class Slider(ControlPanel):
         if sys.is_wx30():
             hbox.Add(self.label, 0, wx.BOTTOM | wx.RIGHT | wx.ALIGN_CENTER_VERTICAL, 0)
             hbox.AddStretchSpacer()
-            hbox.Add(self.control, 0, wx.BOTTOM | wx.ALIGN_RIGHT | wx.ALIGN_CENTER_VERTICAL, 5)
+            hbox.Add(self.control, 0, wx.BOTTOM | wx.ALIGN_CENTER_VERTICAL, 5)
         else:
             hbox.Add(self.label, 0, wx.TOP | wx.RIGHT | wx.ALIGN_CENTER_VERTICAL, 5)
             hbox.AddStretchSpacer()
-            hbox.Add(self.control, 0, wx.TOP | wx.ALIGN_RIGHT | wx.ALIGN_CENTER_VERTICAL, 0)
+            hbox.Add(self.control, 0, wx.TOP | wx.ALIGN_CENTER_VERTICAL, 0)
         self.SetSizer(hbox)
         self.Layout()
 
@@ -425,7 +423,7 @@ class ComboBox(ControlPanel):
         choices = self.setting._possible_values
         _choices = [_(i) for i in choices]
 
-        self.key_dict = dict(zip(_choices, choices))
+        self.key_dict = dict(list(zip(_choices, choices)))
 
         # Elements
         label = wx.StaticText(self, label=_(self.setting._label), size=(130, -1))
@@ -442,7 +440,7 @@ class ComboBox(ControlPanel):
         hbox = wx.BoxSizer(wx.HORIZONTAL)
         hbox.Add(label, 0, wx.RIGHT | wx.ALIGN_CENTER_VERTICAL, 5)
         hbox.AddStretchSpacer()
-        hbox.Add(self.control, 0, wx.ALIGN_RIGHT | wx.ALIGN_CENTER_VERTICAL)
+        hbox.Add(self.control, 0, wx.ALIGN_CENTER_VERTICAL)
         self.SetSizer(hbox)
         self.Layout()
 
@@ -473,7 +471,7 @@ class CheckBox(ControlPanel):
         hbox = wx.BoxSizer(wx.HORIZONTAL)
         hbox.Add(label, 0, wx.RIGHT | wx.ALIGN_CENTER_VERTICAL, 5)
         hbox.AddStretchSpacer()
-        hbox.Add(self.control, 0, wx.ALIGN_RIGHT | wx.ALIGN_CENTER_VERTICAL)
+        hbox.Add(self.control, 0, wx.ALIGN_CENTER_VERTICAL)
         self.SetSizer(hbox)
         self.Layout()
 
@@ -528,7 +526,7 @@ class TextBox(ControlPanel):
         hbox = wx.BoxSizer(wx.HORIZONTAL)
         hbox.Add(label, 0, wx.RIGHT | wx.ALIGN_CENTER_VERTICAL, 5)
         hbox.AddStretchSpacer()
-        hbox.Add(self.control, 0, wx.ALIGN_RIGHT | wx.ALIGN_CENTER_VERTICAL)
+        hbox.Add(self.control, 0, wx.ALIGN_CENTER_VERTICAL)
         self.SetSizer(hbox)
         self.Layout()
 
@@ -601,7 +599,7 @@ class IntTextBox(ControlPanel):
         hbox = wx.BoxSizer(wx.HORIZONTAL)
         hbox.Add(label, 0, wx.RIGHT | wx.ALIGN_CENTER_VERTICAL, 5)
         hbox.AddStretchSpacer()
-        hbox.Add(self.control, 0, wx.ALIGN_RIGHT | wx.ALIGN_CENTER_VERTICAL)
+        hbox.Add(self.control, 0, wx.ALIGN_CENTER_VERTICAL)
         self.SetSizer(hbox)
         self.Layout()
 
@@ -659,7 +657,7 @@ class FloatTextBox(ControlPanel):
         hbox = wx.BoxSizer(wx.HORIZONTAL)
         hbox.Add(label, 0, wx.RIGHT | wx.ALIGN_CENTER_VERTICAL, 5)
         hbox.AddStretchSpacer()
-        hbox.Add(self.control, 0, wx.ALIGN_RIGHT | wx.ALIGN_CENTER_VERTICAL)
+        hbox.Add(self.control, 0, wx.ALIGN_CENTER_VERTICAL)
         self.SetSizer(hbox)
         self.Layout()
 
@@ -836,7 +834,7 @@ class Button(ControlPanel):
 
         # Layout
         hbox = wx.BoxSizer(wx.HORIZONTAL)
-        hbox.Add(self.control, 1, wx.ALIGN_CENTER_VERTICAL | wx.TOP | wx.EXPAND, 2)
+        hbox.Add(self.control, 1, wx.TOP | wx.EXPAND, 2)
         self.SetSizer(hbox)
         self.Layout()
 
@@ -858,7 +856,7 @@ class CallbackButton(ControlPanel):
 
         # Layout
         hbox = wx.BoxSizer(wx.HORIZONTAL)
-        hbox.Add(self.control, 1, wx.ALIGN_CENTER_VERTICAL | wx.TOP | wx.EXPAND, 2)
+        hbox.Add(self.control, 1, wx.TOP | wx.EXPAND, 2)
         self.SetSizer(hbox)
         self.Layout()
 
@@ -886,7 +884,7 @@ class ToggleButton(ControlPanel):
 
         # Layout
         hbox = wx.BoxSizer(wx.HORIZONTAL)
-        hbox.Add(self.control, 1, wx.ALIGN_CENTER_VERTICAL | wx.TOP | wx.EXPAND, 2)
+        hbox.Add(self.control, 1, wx.TOP | wx.EXPAND, 2)
         self.SetSizer(hbox)
         self.Layout()
 

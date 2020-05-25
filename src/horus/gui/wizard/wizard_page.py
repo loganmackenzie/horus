@@ -42,13 +42,10 @@ class WizardPage(wx.Panel):
         hbox.Add(self.video_view, 0, wx.ALL, 0)
         vbox.Add(hbox, 1, wx.ALL | wx.EXPAND, 20)
         hbox = wx.BoxSizer(wx.HORIZONTAL)
-        hbox.Add(self.prev_button, 0, wx.ALL | wx.EXPAND |
-                 wx.ALIGN_CENTER_VERTICAL | wx.ALIGN_LEFT, 2)
+        hbox.Add(self.prev_button, 0, wx.ALL | wx.EXPAND | wx.ALIGN_LEFT, 2)
         hbox.Add((0, 0), 1, wx.EXPAND)
-        hbox.Add(self.skip_button, 0, wx.ALL | wx.EXPAND |
-                 wx.ALIGN_CENTER_VERTICAL | wx.ALIGN_RIGHT, 2)
-        hbox.Add(self.next_button, 0, wx.ALL | wx.EXPAND |
-                 wx.ALIGN_CENTER_VERTICAL | wx.ALIGN_RIGHT, 2)
+        hbox.Add(self.skip_button, 0, wx.ALL | wx.EXPAND, 2)
+        hbox.Add(self.next_button, 0, wx.ALL | wx.EXPAND, 2)
         vbox.Add(hbox, 0, wx.ALL | wx.EXPAND, 10)
 
         self.SetSizer(vbox)
