@@ -24,31 +24,31 @@ if system == 'Darwin':
 class WrongCamera(Exception):
 
     def __init__(self):
-        Exception.__init__(self, "Wrong Camera")
+        Exception.__init__(self, 'Wrong Camera')
 
 
 class CameraNotConnected(Exception):
 
     def __init__(self):
-        Exception.__init__(self, "Camera Not Connected")
+        Exception.__init__(self, 'Camera Not Connected')
 
 
 class InvalidVideo(Exception):
 
     def __init__(self):
-        Exception.__init__(self, "Invalid Video")
+        Exception.__init__(self, 'Invalid Video')
 
 
 class WrongDriver(Exception):
 
     def __init__(self):
-        Exception.__init__(self, "Wrong Driver")
+        Exception.__init__(self, 'Wrong Driver')
 
 
 class InputOutputError(Exception):
 
     def __init__(self):
-        Exception.__init__(self, "V4L2 Input/Output Error")
+        Exception.__init__(self, 'V4L2 Input/Output Error')
 
 
 class Camera(object):
@@ -102,7 +102,7 @@ class Camera(object):
         self._vflip = False
 
     def connect(self):
-        logger.info("Connecting camera {0}".format(self.camera_id))
+        logger.info('Connecting camera {0}'.format(self.camera_id))
         self._is_connected = False
         self.initialize()
         if system == 'Darwin':
@@ -121,14 +121,14 @@ class Camera(object):
             self._check_video()
             self._check_camera()
             self._check_driver()
-            logger.info(" Done")
+            logger.info(' Done')
         else:
             raise CameraNotConnected()
 
     def disconnect(self):
         tries = 0
         if self._is_connected:
-            logger.info("Disconnecting camera {0}".format(self.camera_id))
+            logger.info('Disconnecting camera {0}'.format(self.camera_id))
             if self._capture is not None:
                 if self._capture.isOpened():
                     self._is_connected = False
@@ -136,7 +136,7 @@ class Camera(object):
                         tries += 1
                         if not self._reading:
                             self._capture.release()
-                logger.info(" Done")
+                logger.info(' Done')
 
     def set_unplug_callback(self, value):
         self.unplug_callback = value
@@ -301,9 +301,9 @@ class Camera(object):
 
     def set_luminosity(self, value):
         possible_values = {
-            "High": 0.5,
-            "Medium": 1.0,
-            "Low": 2.0
+            'High': 0.5,
+            'Medium': 1.0,
+            'Low': 2.0
         }
         self._luminosity = possible_values[value]
         self.set_exposure(self._exposure, force=True)
@@ -369,7 +369,7 @@ class Camera(object):
         self._tries = 0
 
     def _fail(self):
-        logger.debug("Camera fail")
+        logger.debug('Camera fail')
         self._tries += 1
         if self._tries >= self._number_frames_fail:
             self._tries = 0

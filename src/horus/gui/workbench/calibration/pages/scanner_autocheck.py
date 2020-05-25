@@ -66,34 +66,34 @@ class ScannerAutocheckPages(wx.Panel):
 
         if ret:
             dlg = wx.MessageDialog(
-                self, _("Scanner configured correctly"),
-                _("Success"), wx.OK | wx.ICON_INFORMATION)
+                self, _('Scanner configured correctly'),
+                _('Success'), wx.OK | wx.ICON_INFORMATION)
             dlg.ShowModal()
             dlg.Destroy()
         else:
             if isinstance(result, PatternNotDetected):
                 dlg = wx.MessageDialog(
-                    self, _("Please, put the pattern on the platform. "
-                            "Also you can set up the calibration's capture "
-                            "settings in the \"Adjustment workbench\" "
-                            "until the pattern is detected correctly"),
+                    self, _('Please, put the pattern on the platform. '
+                            'Also you can set up the calibration\'s capture '
+                            'settings in the "Adjustment workbench" '
+                            'until the pattern is detected correctly'),
                     _(result), wx.OK | wx.ICON_ERROR)
                 dlg.ShowModal()
                 dlg.Destroy()
             elif isinstance(result, WrongMotorDirection):
                 dlg = wx.MessageDialog(
                     self, _(
-                        "Please, select \"Invert the motor direction\" in the preferences"),
+                        'Please, select "Invert the motor direction" in the preferences'),
                     _(result), wx.OK | wx.ICON_ERROR)
                 dlg.ShowModal()
                 dlg.Destroy()
                 self.GetParent().GetParent().launch_preferences(basic=True)
             elif isinstance(result, LaserNotDetected):
                 dlg = wx.MessageDialog(
-                    self, _("Please, check the lasers connection. "
-                            "Also you can set up the calibration's capture and "
-                            "segmentation settings in the \"Adjustment workbench\" "
-                            "until the lasers are detected correctly"),
+                    self, _('Please, check the lasers connection. '
+                            'Also you can set up the calibration\'s capture and '
+                            'segmentation settings in the "Adjustment workbench" '
+                            'until the lasers are detected correctly'),
                     _(result), wx.OK | wx.ICON_ERROR)
                 dlg.ShowModal()
                 dlg.Destroy()

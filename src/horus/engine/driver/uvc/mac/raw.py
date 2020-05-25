@@ -28,32 +28,32 @@ dll_path = resources.get_path_for_tools('uvcc.so')
 
 ### defines and constants
 class uvccModelId(Structure):
-    _fields_ = [("idVendor", c_uint16 ),
-                ("idProduct", c_uint16 )]
+    _fields_ = [('idVendor', c_uint16 ),
+                ('idProduct', c_uint16 )]
 
 class IOUSBDeviceDescriptor(Structure):
-        _fields_ = [("bLength", c_uint8),
-                    ("bDescriptorType", c_uint8),
-                    ("bcdUSB", c_uint16),
-                    ("bDeviceClass", c_uint8),
-                    ("bDeviceSubClass", c_uint8),
-                    ("bDeviceProtocol", c_uint8),
-                    ("bMaxPacketSize0", c_uint8),
-                    ("idVendor", c_uint16),
-                    ("idProduct", c_uint16),
-                    ("bcdDevice", c_uint16),
-                    ("iManufacturer", c_uint8),
-                    ("iProduct", c_uint8),
-                    ("iSerialNumber", c_uint8),
-                    ("bNumConfigurations", c_uint8)]
+        _fields_ = [('bLength', c_uint8),
+                    ('bDescriptorType', c_uint8),
+                    ('bcdUSB', c_uint16),
+                    ('bDeviceClass', c_uint8),
+                    ('bDeviceSubClass', c_uint8),
+                    ('bDeviceProtocol', c_uint8),
+                    ('bMaxPacketSize0', c_uint8),
+                    ('idVendor', c_uint16),
+                    ('idProduct', c_uint16),
+                    ('bcdDevice', c_uint16),
+                    ('iManufacturer', c_uint8),
+                    ('iProduct', c_uint8),
+                    ('iSerialNumber', c_uint8),
+                    ('bNumConfigurations', c_uint8)]
 
 class uvccCam(Structure):
-    _fields_ = [("idLocation", c_uint32 ),
-                ("mId", POINTER(uvccModelId) ),
-                ("devDesc", IOUSBDeviceDescriptor),
-                ("devIf", c_void_p ), # IOUSBDeviceInterface197
-                ("ctrlIf", c_void_p), #IOUSBDeviceInterface197
-                ("ifNo", c_uint8 )]
+    _fields_ = [('idLocation', c_uint32 ),
+                ('mId', POINTER(uvccModelId) ),
+                ('devDesc', IOUSBDeviceDescriptor),
+                ('devIf', c_void_p ), # IOUSBDeviceInterface197
+                ('ctrlIf', c_void_p), #IOUSBDeviceInterface197
+                ('ifNo', c_uint8 )]
 
 
 
@@ -156,14 +156,14 @@ def uvccReleaseCam(cam):
 
 def uvccOpenCam(cam):
     if __uvcc_dll.uvccOpenCam(cam) !=0:
-        logger.error("Cam could not be opended")
+        logger.error('Cam could not be opended')
         return False
     else:
         return True
 
 def uvccCloseCam(cam):
     if __uvcc_dll.uvccCloseCam(cam) !=0:
-        logger.error("Cam could not be closed")
+        logger.error('Cam could not be closed')
         return False
     else:
         return True
@@ -217,7 +217,7 @@ def uvccGetCamsWithModelID(mId):
     if cam_n > 0 :
         return cam_list,cam_n
     else:
-        logger.error("could not add camera that matched uvccModelId: %s"%mId)
+        logger.error('could not add camera that matched uvccModelId: %s'%mId)
         return None,0
 
 def uvccGetCamWithQTUniqueID(uId):
@@ -249,32 +249,32 @@ def uvccGetVal(control,camera):
 if __name__ == '__main__':
     uvccInit()
     cam_n,cam_list = uvccGetCamList()
-    print("detected cameras:",cam_n)
+    print('detected cameras:',cam_n)
     for i in range(cam_n):
-        print("idVendor",hex(cam_list[i].contents.devDesc.idVendor))
-        print("idProduct",hex(cam_list[i].contents.devDesc.idProduct))
-        print("Location", cam_list[i].contents.idLocation)
-        print("Product Name:",uvccCamProduct(cam_list[i].contents))
-        print("Product Serial:",uvccCamSerialNumber(cam_list[i].contents))
-        print("Manufacturer:", uvccCamManufacturer(cam_list[i].contents))
-        print("uId:",uvccCamQTUniqueID(cam_list[i].contents))
+        print('idVendor',hex(cam_list[i].contents.devDesc.idVendor))
+        print('idProduct',hex(cam_list[i].contents.devDesc.idProduct))
+        print('Location', cam_list[i].contents.idLocation)
+        print('Product Name:',uvccCamProduct(cam_list[i].contents))
+        print('Product Serial:',uvccCamSerialNumber(cam_list[i].contents))
+        print('Manufacturer:', uvccCamManufacturer(cam_list[i].contents))
+        print('uId:',uvccCamQTUniqueID(cam_list[i].contents))
         uid = uvccCamQTUniqueID(cam_list[i].contents)
         # manually construct uId: (it looks similar to this: 0x1a11000005ac8510)
-        # uid = "0x%08x%04x%04x" %(cam_list[i].contents.idLocation,cam_list[i].contents.mId.contents.idVendor,cam_list[i].contents.mId.contents.idProduct)
+        # uid = '0x%08x%04x%04x' %(cam_list[i].contents.idLocation,cam_list[i].contents.mId.contents.idVendor,cam_list[i].contents.mId.contents.idProduct)
 
-    # print uvccSendRequest("UVCC_REQ_BRIGHTNESS_ABS",UVC_GET_DEF,cam_list[cam_n-1])
-    # print uvccGetVal("UVCC_REQ_BRIGHTNESS_ABS",cam_list[cam_n-1])
-    # print set_val(0,"UVCC_REQ_BRIGHTNESS_ABS",cam_list[cam_n-1])
+    # print uvccSendRequest('UVCC_REQ_BRIGHTNESS_ABS',UVC_GET_DEF,cam_list[cam_n-1])
+    # print uvccGetVal('UVCC_REQ_BRIGHTNESS_ABS',cam_list[cam_n-1])
+    # print set_val(0,'UVCC_REQ_BRIGHTNESS_ABS',cam_list[cam_n-1])
     __uvcc_dll.uvccReleaseCamList(cam_list,cam_n)
     cam = uvccGetCamWithQTUniqueID(uid)
     # # cam = uvccGetCamsWithModelID(mid)
     if cam:
         uvccOpenCam(cam)
-        print("Location", cam.contents.idLocation)
-        print("Product Name:",uvccCamProduct(cam))
-        print(uvccRequestInfo("UVCC_REQ_EXPOSURE_ABS",cam))
-        # val =  uvccGetVal("UVCC_REQ_BRIGHTNESS_ABS",cam)
-        # print uvccSetVal(val-1,"UVCC_REQ_BRIGHTNESS_ABS",cam)
+        print('Location', cam.contents.idLocation)
+        print('Product Name:',uvccCamProduct(cam))
+        print(uvccRequestInfo('UVCC_REQ_EXPOSURE_ABS',cam))
+        # val =  uvccGetVal('UVCC_REQ_BRIGHTNESS_ABS',cam)
+        # print uvccSetVal(val-1,'UVCC_REQ_BRIGHTNESS_ABS',cam)
         uvccCloseCam(cam)
         uvccReleaseCam(cam)
     __uvcc_dll.uvccExit()

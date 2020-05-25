@@ -15,25 +15,25 @@ from horus.engine.calibration.calibration import Calibration, CalibrationCancel
 class PatternNotDetected(Exception):
 
     def __init__(self):
-        Exception.__init__(self, "Pattern Not Detected")
+        Exception.__init__(self, 'Pattern Not Detected')
 
 
 class WrongMotorDirection(Exception):
 
     def __init__(self):
-        Exception.__init__(self, "Wrong Motor Direction")
+        Exception.__init__(self, 'Wrong Motor Direction')
 
 
 class LaserNotDetected(Exception):
 
     def __init__(self):
-        Exception.__init__(self, "Laser Not Detected")
+        Exception.__init__(self, 'Laser Not Detected')
 
 
 class WrongLaserPosition(Exception):
 
     def __init__(self):
-        Exception.__init__(self, "Wrong Laser Position")
+        Exception.__init__(self, 'Wrong Laser Position')
 
 
 @Singleton

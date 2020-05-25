@@ -18,24 +18,24 @@ class ScanningPage(WizardPage):
 
     def __init__(self, parent, button_prev_callback=None, button_next_callback=None):
         WizardPage.__init__(self, parent,
-                            title=_("Scanning"),
+                            title=_('Scanning'),
                             button_prev_callback=button_prev_callback,
                             button_next_callback=button_next_callback)
 
         value = abs(float(profile.settings['motor_step_scanning']))
         if value > 1.35:
-            value = _("Low")
+            value = _('Low')
         elif value > 0.625:
-            value = _("Medium")
+            value = _('Medium')
         else:
-            value = _("High")
-        self.resolution_label = wx.StaticText(self.panel, label=_("Resolution"))
-        self.resolution_label.SetToolTip(wx.ToolTip(_("Set the motor step. High (0.45º),"
-                                                      " Medium (0.9º), Low (1.8º)")))
+            value = _('High')
+        self.resolution_label = wx.StaticText(self.panel, label=_('Resolution'))
+        self.resolution_label.SetToolTip(wx.ToolTip(_('Set the motor step. High (0.45º),'
+                                                      ' Medium (0.9º), Low (1.8º)')))
         self.resolution_combo_box = wx.ComboBox(self.panel, wx.ID_ANY,
                                                 size=(200, -1),
                                                 value=value,
-                                                choices=[_("High"), _("Medium"), _("Low")],
+                                                choices=[_('High'), _('Medium'), _('Low')],
                                                 style=wx.CB_READONLY)
 
         _choices = []
@@ -43,14 +43,14 @@ class ScanningPage(WizardPage):
         for i in choices:
             _choices.append(_(i))
         self.laser_dict = dict(list(zip(_choices, choices)))
-        self.laser_label = wx.StaticText(self.panel, label=_("Use laser"))
+        self.laser_label = wx.StaticText(self.panel, label=_('Use laser'))
         self.laser_combo_box = wx.ComboBox(self.panel, wx.ID_ANY,
                                            size=(200, -1),
                                            value=_(profile.settings['use_laser']),
                                            choices=_choices,
                                            style=wx.CB_READONLY)
 
-        self.capture_texture_label = wx.StaticText(self.panel, label=_("Capture texture"))
+        self.capture_texture_label = wx.StaticText(self.panel, label=_('Capture texture'))
         self.capture_texture_checkbox = wx.CheckBox(self.panel,
                                                     size=(200, -1))
         self.capture_texture_checkbox.SetValue(profile.settings['capture_texture'])
@@ -93,11 +93,11 @@ class ScanningPage(WizardPage):
 
     def on_resolution_combo_box_changed(self, event):
         value = event.GetEventObject().GetValue()
-        if value == _("High"):
+        if value == _('High'):
             value = 0.45
-        elif value == _("Medium"):
+        elif value == _('Medium'):
             value = 0.9
-        elif value == _("Low"):
+        elif value == _('Low'):
             value = 1.8
         profile.settings['motor_step_scanning'] = value
         ciclop_scan.motor_step = value

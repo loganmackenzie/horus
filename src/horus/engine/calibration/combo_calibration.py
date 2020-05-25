@@ -19,7 +19,7 @@ logger = logging.getLogger(__name__)
 class ComboCalibrationError(Exception):
 
     def __init__(self):
-        Exception.__init__(self, "ComboCalibrationError")
+        Exception.__init__(self, 'ComboCalibrationError')
 
 
 @Singleton
@@ -113,10 +113,10 @@ class ComboCalibration(MovingCalibration):
             # Get real origin
             self.t = center - self.pattern.origin_distance * np.array(normal)
 
-            logger.info("Platform calibration ")
-            logger.info(" Translation: " + str(self.t))
-            logger.info(" Rotation: " + str(self.R).replace('\n', ''))
-            logger.info(" Normal: " + str(normal))
+            logger.info('Platform calibration ')
+            logger.info(' Translation: ' + str(self.t))
+            logger.info(' Rotation: ' + str(self.R).replace('\n', ''))
+            logger.info(' Normal: ' + str(normal))
 
         # Return response
         result = True

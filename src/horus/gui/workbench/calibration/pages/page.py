@@ -10,7 +10,7 @@ import wx._core
 
 class Page(wx.Panel):
 
-    def __init__(self, parent, title="Title", desc="", left="Left", right="Right",
+    def __init__(self, parent, title='Title', desc='', left='Left', right='Right',
                  button_left_callback=None, button_right_callback=None, view_progress=False):
         wx.Panel.__init__(self, parent)  # , style=wx.RAISED_BORDER)
 
@@ -24,7 +24,7 @@ class Page(wx.Panel):
         title_font = title_text.GetFont()
         title_font.SetWeight(wx.BOLD)
         title_text.SetFont(title_font)
-        if desc != "":
+        if desc != '':
             self.desc_text = wx.StaticText(self, label=desc)
         self.gauge = wx.Gauge(self, range=100, size=(-1, 30))
         self.left_button = wx.Button(button_panel, -1, left)
@@ -37,7 +37,7 @@ class Page(wx.Panel):
         hbox = wx.BoxSizer(wx.HORIZONTAL)
         self.panel_box = wx.BoxSizer(wx.HORIZONTAL)
         vbox.Add(title_text, 0, wx.ALL ^ wx.BOTTOM | wx.EXPAND, 12)
-        if desc != "":
+        if desc != '':
             vbox.Add(self.desc_text, 0, wx.ALL | wx.EXPAND, 14)
         vbox.Add(self.panel, 1, wx.ALL | wx.EXPAND, 8)
         vbox.Add(self.gauge, 0, wx.ALL | wx.EXPAND, 10)

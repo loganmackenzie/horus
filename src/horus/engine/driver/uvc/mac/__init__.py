@@ -69,24 +69,24 @@ class Control(object):
             self.default =  self.get_(UVC_GET_DEF)
 
             if ((self.max,self.min) == (None,None)) or ((self.max,self.min) == (1,0)) :
-                self.type  = "bool"
+                self.type  = 'bool'
             # elif (self.max,self.min) == (None,None):
             #     ###I guess this should be a menu
-            #     self.type  = "int"
-            #     self.flags = "active"
+            #     self.type  = 'int'
+            #     self.flags = 'active'
             #     self.min = 0
             #     self.max = 20
             #     self.step = 1
             else:
-                self.type  = "int"
+                self.type  = 'int'
 
             if self.info >> 3 & 1: # Disabled due to automatic mode (under device control)
-                self.flags = "inactive"
+                self.flags = 'inactive'
             else:
-                self.flags = "active"
+                self.flags = 'active'
         else:
-            self.type  = "unknown type"
-            self.flags = "control not supported"
+            self.type  = 'unknown type'
+            self.flags = 'control not supported'
             self.value = None
 
     def get_val_from_device(self):
@@ -111,7 +111,7 @@ class Controls(dict):
     def __init__(self,uId):
         uvccInit()
         self.handle = uvccGetCamWithQTUniqueID(uId)
-        assert self.handle is not None, "UVCC could not open camera based on uId %s" %uId
+        assert self.handle is not None, 'UVCC could not open camera based on uId %s' %uId
          # list of all controls implemented by uvcc,
          # the names evaluate to ints using a dict lookup in raw.py
         controls_str = uvcc_controls[:-1] #the last one is not a real control
@@ -120,12 +120,12 @@ class Controls(dict):
 
     def update_from_device(self):
         for c in self.values():
-            if c.flags == "active":
+            if c.flags == 'active':
                 c.value = c.get_val_from_device()
 
     def load_defaults(self):
         for c in self.values():
-            if c.flags == "active" and c.default is not None:
+            if c.flags == 'active' and c.default is not None:
                 c.set_val(c.default)
 
     def __del__(self):

@@ -17,35 +17,35 @@ from horus.util import profile
 class MachineSettingsDialog(wx.Dialog):
 
     def __init__(self, parent):
-        wx.Dialog.__init__(self, None, title=_("Machine settings"))
+        wx.Dialog.__init__(self, None, title=_('Machine settings'))
 
         self.main = parent
 
         # Elements
-        self.machineShapeLabel = wx.StaticText(self, label=_("Platform shape"))
-        self.machineShapes = profile.settings.get_possible_values("machine_shape")
+        self.machineShapeLabel = wx.StaticText(self, label=_('Platform shape'))
+        self.machineShapes = profile.settings.get_possible_values('machine_shape')
         self.translatedMachineShapes = [_(s) for s in self.machineShapes]
         self.machineShapeCombo = wx.ComboBox(
             self, choices=self.translatedMachineShapes, size=(170, -1), style=wx.CB_READONLY)
 
         self.dimensionsStaticText = wx.StaticText(
-            self, label=_("Platform dimensions"), style=wx.ALIGN_CENTRE)
-        self.diameterLabel = wx.StaticText(self, label=_("Diameter"))
+            self, label=_('Platform dimensions'), style=wx.ALIGN_CENTRE)
+        self.diameterLabel = wx.StaticText(self, label=_('Diameter'))
         self.diameterField = wx.lib.intctrl.IntCtrl(self, size=(170, -1), style=wx.TE_RIGHT)
-        self.widthLabel = wx.StaticText(self, label=_("Width"))
+        self.widthLabel = wx.StaticText(self, label=_('Width'))
         self.widthField = wx.lib.intctrl.IntCtrl(self, size=(170, -1), style=wx.TE_RIGHT)
-        self.heightLabel = wx.StaticText(self, label=_("Height"))
+        self.heightLabel = wx.StaticText(self, label=_('Height'))
         self.heightField = wx.lib.intctrl.IntCtrl(self, size=(170, -1), style=wx.TE_RIGHT)
-        self.depthLabel = wx.StaticText(self, label=_("Depth"))
+        self.depthLabel = wx.StaticText(self, label=_('Depth'))
         self.depthField = wx.lib.intctrl.IntCtrl(self, size=(170, -1), style=wx.TE_RIGHT)
 
-        self.machineModelLabel = wx.StaticText(self, label=_("Machine model"))
-        self.machineModelButton = wx.Button(self, label=_("Browse"))
+        self.machineModelLabel = wx.StaticText(self, label=_('Machine model'))
+        self.machineModelButton = wx.Button(self, label=_('Browse'))
         self.machineModelField = wx.StaticText(self, size=(200, -1))
 
-        self.defaultButton = wx.Button(self, label=_("Default"))
-        self.cancel_button = wx.Button(self, label=_("Cancel"))
-        self.saveButton = wx.Button(self, label=_("Save"))
+        self.defaultButton = wx.Button(self, label=_('Default'))
+        self.cancel_button = wx.Button(self, label=_('Cancel'))
+        self.saveButton = wx.Button(self, label=_('Save'))
 
         # Events
         self.machineShapeCombo.Bind(wx.EVT_COMBOBOX, self.onMachineShapeComboChanged)
@@ -156,11 +156,11 @@ class MachineSettingsDialog(wx.Dialog):
         vbox = self.get_sizer()
         machine_shape = self.machineShapes[
             self.translatedMachineShapes.index(self.machineShapeCombo.GetValue())]
-        if machine_shape == "Circular":
+        if machine_shape == 'Circular':
             vbox.Show(self.diam_hbox, recursive=True)
             vbox.Hide(self.width_hbox, recursive=True)
             vbox.Hide(self.depth_hbox, recursive=True)
-        elif machine_shape == "Rectangular":
+        elif machine_shape == 'Rectangular':
             vbox.Hide(self.diam_hbox, recursive=True)
             vbox.Show(self.width_hbox, recursive=True)
             vbox.Show(self.depth_hbox, recursive=True)
@@ -169,9 +169,9 @@ class MachineSettingsDialog(wx.Dialog):
 
     def onMachineModelButton(self, event):
         dlg = wx.FileDialog(
-            self, message=_("Select binary file to load"),
+            self, message=_('Select binary file to load'),
             style=wx.FD_OPEN | wx.FD_FILE_MUST_EXIST)
-        dlg.SetWildcard("Model files (*.stl)|*.stl")
+        dlg.SetWildcard('Model files (*.stl)|*.stl')
         if dlg.ShowModal() == wx.ID_OK:
             self.machineModelPath = dlg.GetPath()
             self.machineModelField.SetLabel(dlg.GetFilename())

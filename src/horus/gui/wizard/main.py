@@ -23,7 +23,7 @@ class Wizard(wx.Dialog):
             size = (760, 540)
         else:
             size = (760, 520)
-        super(Wizard, self).__init__(parent, title="", size=size)
+        super(Wizard, self).__init__(parent, title='', size=size)
 
         self.parent = parent
 
@@ -92,8 +92,8 @@ class Wizard(wx.Dialog):
         result = True
         if message:
             dlg = wx.MessageDialog(
-                self, _("Do you really want to exit?"),
-                _("Exit wizard"), wx.YES_NO | wx.ICON_INFORMATION)
+                self, _('Do you really want to exit?'),
+                _('Exit wizard'), wx.YES_NO | wx.ICON_INFORMATION)
             result = dlg.ShowModal() == wx.ID_YES
             dlg.Destroy()
         if result:
@@ -150,8 +150,8 @@ class Wizard(wx.Dialog):
         profile.settings.save_settings()
         dlg = wx.MessageDialog(
             self,
-            _("You have completed the wizard.\nPress Play button to start scanning."),
-            _("Ready to scan!"), wx.OK | wx.ICON_INFORMATION)
+            _('You have completed the wizard.\nPress Play button to start scanning.'),
+            _('Ready to scan!'), wx.OK | wx.ICON_INFORMATION)
         dlg.ShowModal()
         dlg.Destroy()
         self.connection_page.video_view.stop()

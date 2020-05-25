@@ -14,7 +14,7 @@ from horus.gui.util.video_view import VideoView
 
 class WizardPage(wx.Panel):
 
-    def __init__(self, parent, title="Title", button_prev_callback=None, button_next_callback=None):
+    def __init__(self, parent, title='Title', button_prev_callback=None, button_next_callback=None):
         wx.Panel.__init__(self, parent)
 
         self.title = title
@@ -27,9 +27,9 @@ class WizardPage(wx.Panel):
         self.button_next_callback = button_next_callback
 
         self.video_view = VideoView(self, size=(300, 400), wxtimer=False)
-        self.prev_button = wx.Button(self, label=_("Previous"))
-        self.skip_button = wx.Button(self, label=_("Skip"))
-        self.next_button = wx.Button(self, label=_("Next"))
+        self.prev_button = wx.Button(self, label=_('Previous'))
+        self.skip_button = wx.Button(self, label=_('Skip'))
+        self.next_button = wx.Button(self, label=_('Next'))
 
     def intialize(self, pages):
         self.breadcrumbs = Breadcrumbs(self, pages)
@@ -97,7 +97,7 @@ class Breadcrumbs(wx.Panel):
             title.Bind(wx.EVT_LEFT_UP, self.on_title_pressed)
             hbox.Add(title, 0, wx.ALL | wx.EXPAND, 0)
             if page is not pages[-1]:
-                line = wx.StaticText(self, label="  .....................  ")
+                line = wx.StaticText(self, label='  .....................  ')
                 line_font = line.GetFont()
                 line_font.SetWeight(wx.LIGHT)
                 line.SetFont(line_font)

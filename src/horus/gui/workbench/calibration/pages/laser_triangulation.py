@@ -153,19 +153,19 @@ class ResultPage(Page):
             self.plot_panel.Show()
             self.Layout()
             dlg = wx.MessageDialog(
-                self, _("Lasers calibrated correctly"),
-                _("Success"), wx.OK | wx.ICON_INFORMATION)
+                self, _('Lasers calibrated correctly'),
+                _('Success'), wx.OK | wx.ICON_INFORMATION)
             dlg.ShowModal()
             dlg.Destroy()
             self.Layout()
         else:
             if isinstance(result, LaserTriangulationError):
                 dlg = wx.MessageDialog(
-                    self, _("Laser triangulation calibration has failed. "
-                            "Please check the pattern and the lasers and try again. "
-                            "Also you can set up the calibration's settings "
-                            "in the \"Adjustment workbench\" until the pattern "
-                            "and the lasers are detected correctly"),
+                    self, _('Laser triangulation calibration has failed. '
+                            'Please check the pattern and the lasers and try again. '
+                            'Also you can set up the calibration\'s settings '
+                            'in the "Adjustment workbench" until the pattern '
+                            'and the lasers are detected correctly'),
                     _(result), wx.OK | wx.ICON_ERROR)
                 dlg.ShowModal()
                 dlg.Destroy()

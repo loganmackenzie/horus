@@ -19,7 +19,7 @@ logger = logging.getLogger(__name__)
 class PlatformExtrinsicsError(Exception):
 
     def __init__(self):
-        Exception.__init__(self, "PlatformExtrinsicsError")
+        Exception.__init__(self, 'PlatformExtrinsicsError')
 
 
 estimated_t = [-5, 90, 320]
@@ -86,10 +86,10 @@ class PlatformExtrinsics(MovingCalibration):
             # Get real origin
             self.t = center - self.pattern.origin_distance * np.array(normal)
 
-            logger.info("Platform calibration ")
-            logger.info(" Translation: " + str(self.t))
-            logger.info(" Rotation: " + str(self.R).replace('\n', ''))
-            logger.info(" Normal: " + str(normal))
+            logger.info('Platform calibration ')
+            logger.info(' Translation: ' + str(self.t))
+            logger.info(' Rotation: ' + str(self.R).replace('\n', ''))
+            logger.info(' Normal: ' + str(normal))
 
         if self._is_calibrating and self.t is not None and \
            np.linalg.norm(self.t - estimated_t) < 100:

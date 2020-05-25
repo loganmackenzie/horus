@@ -71,8 +71,8 @@ def _load_binary(mesh, stream):
 def load_scene(filename):
     obj = model.Model(filename)
     m = obj._add_mesh()
-    with open(filename, "rb") as f:
-        if f.read(5).lower() == "solid":
+    with open(filename, 'rb') as f:
+        if f.read(5).lower() == 'solid':
             _load_ascii(m, f)
         else:
             _load_binary(m, f)

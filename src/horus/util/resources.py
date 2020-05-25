@@ -20,7 +20,7 @@ def set_base_path(path):
 
 
 def get_path_for_resource(directory, resource_name):
-    assert os.path.isdir(resource_base_path), "{p} is not a directory".format(p=resource_base_path)
+    assert os.path.isdir(resource_base_path), '{p} is not a directory'.format(p=resource_base_path)
     path = os.path.normpath(os.path.join(resource_base_path, directory, resource_name))
     return path
 

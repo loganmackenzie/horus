@@ -150,19 +150,19 @@ class ResultPage(Page):
             self.plot_panel.Show()
             self.Layout()
             dlg = wx.MessageDialog(
-                self, _("Platform calibrated correctly"),
-                _("Success"), wx.OK | wx.ICON_INFORMATION)
+                self, _('Platform calibrated correctly'),
+                _('Success'), wx.OK | wx.ICON_INFORMATION)
             dlg.ShowModal()
             dlg.Destroy()
             self.Layout()
         else:
             if isinstance(result, PlatformExtrinsicsError):
                 dlg = wx.MessageDialog(
-                    self, _("Platform extrinsics calibration has failed. "
-                            "Please check the pattern and try again. "
-                            "Also you can set up the calibration's capture settings "
-                            "in the \"Adjustment workbench\" until the pattern "
-                            "is detected correctly"),
+                    self, _('Platform extrinsics calibration has failed. '
+                            'Please check the pattern and try again. '
+                            'Also you can set up the calibration\'s capture settings '
+                            'in the "Adjustment workbench" until the pattern '
+                            'is detected correctly'),
                     _(result), wx.OK | wx.ICON_ERROR)
                 dlg.ShowModal()
                 dlg.Destroy()

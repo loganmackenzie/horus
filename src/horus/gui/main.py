@@ -35,7 +35,7 @@ from horus.util import profile, resources, mesh_loader, version, system as sys
 import logging
 logger = logging.getLogger(__name__)
 
-__title__ = "Horus " + __version__
+__title__ = 'Horus ' + __version__
 
 
 class MainWindow(wx.Frame):
@@ -43,7 +43,7 @@ class MainWindow(wx.Frame):
     def __init__(self):
         wx.Frame.__init__(self, None, title=__title__, size=(980, 623))
 
-        logger.info("Start application " + __title__)
+        logger.info('Start application ' + __title__)
 
         # Initialize driver
         self.initialize_driver()
@@ -58,12 +58,12 @@ class MainWindow(wx.Frame):
         x, y, w, h = wx.Display(0).GetGeometry()
         self.SetMinSize((600, 450))
         self.SetPosition((x + (w - ws) / 2., y + (h - hs) / 2.))
-        self.SetIcon(wx.Icon(resources.get_path_for_image("horus.ico"), wx.BITMAP_TYPE_ICO))
+        self.SetIcon(wx.Icon(resources.get_path_for_image('horus.ico'), wx.BITMAP_TYPE_ICO))
 
         self.Bind(wx.EVT_CLOSE, self.on_close)
 
     def __del__(self):
-        logger.info("Finish application " + __title__)
+        logger.info('Finish application ' + __title__)
 
     def load_workbenches(self):
         self.toolbar = ToolbarConnection(self, self.on_connect, self.on_disconnect)
@@ -91,59 +91,59 @@ class MainWindow(wx.Frame):
 
         # Menu File
         self.menu_file = wx.Menu()
-        self.menu_launch_wizard = self.menu_file.Append(wx.NewId(), _("Launch wizard"))
+        self.menu_launch_wizard = self.menu_file.Append(wx.NewId(), _('Launch wizard'))
         self.menu_file.AppendSeparator()
-        self.menu_load_model = self.menu_file.Append(wx.NewId(), _("Open model"))
-        self.menu_save_model = self.menu_file.Append(wx.NewId(), _("Save model"))
-        self.menu_clear_model = self.menu_file.Append(wx.NewId(), _("Clear model"))
+        self.menu_load_model = self.menu_file.Append(wx.NewId(), _('Open model'))
+        self.menu_save_model = self.menu_file.Append(wx.NewId(), _('Save model'))
+        self.menu_clear_model = self.menu_file.Append(wx.NewId(), _('Clear model'))
         self.menu_file.AppendSeparator()
         self.menu_open_profile = self.menu_file.Append(
-            wx.NewId(), _("Open profile"), _("Open profile .json"))
+            wx.NewId(), _('Open profile'), _('Open profile .json'))
         self.menu_save_profile = self.menu_file.Append(
-            wx.NewId(), _("Save profile"), _("Save profile .json"))
+            wx.NewId(), _('Save profile'), _('Save profile .json'))
         self.menu_reset_profile = self.menu_file.Append(
-            wx.NewId(), _("Reset profile"), _("Reset default values"))
+            wx.NewId(), _('Reset profile'), _('Reset default values'))
         self.menu_file.AppendSeparator()
         self.menu_open_calibration_profile = self.menu_file.Append(
-            wx.NewId(), _("Open calibration"), _("Open calibration .json"))
+            wx.NewId(), _('Open calibration'), _('Open calibration .json'))
         self.menu_save_calibration_profile = self.menu_file.Append(
-            wx.NewId(), _("Save calibration"), _("Save calibration .json"))
+            wx.NewId(), _('Save calibration'), _('Save calibration .json'))
         self.menu_reset_calibration_profile = self.menu_file.Append(
-            wx.NewId(), _("Reset calibration"), _("Reset calibration default values"))
+            wx.NewId(), _('Reset calibration'), _('Reset calibration default values'))
         self.menu_file.AppendSeparator()
         self.menu_export_log = self.menu_file.Append(
-            wx.NewId(), _("Export log"), _("Export log file"))
+            wx.NewId(), _('Export log'), _('Export log file'))
         self.menu_clear_log = self.menu_file.Append(
-            wx.NewId(), _("Clear log"), _("Clear log file"))
+            wx.NewId(), _('Clear log'), _('Clear log file'))
         self.menu_file.AppendSeparator()
-        self.menu_exit = self.menu_file.Append(wx.ID_EXIT, _("Exit"))
-        self.menu_bar.Append(self.menu_file, _("File"))
+        self.menu_exit = self.menu_file.Append(wx.ID_EXIT, _('Exit'))
+        self.menu_bar.Append(self.menu_file, _('File'))
 
         # Menu Edit
         self.menu_edit = wx.Menu()
-        self.menu_preferences = self.menu_edit.Append(wx.NewId(), _("Preferences"))
-        # self.menu_machine_settings = self.menu_edit.Append(wx.NewId(), _("Machine settings"))
-        self.menu_bar.Append(self.menu_edit, _("Edit"))
+        self.menu_preferences = self.menu_edit.Append(wx.NewId(), _('Preferences'))
+        # self.menu_machine_settings = self.menu_edit.Append(wx.NewId(), _('Machine settings'))
+        self.menu_bar.Append(self.menu_edit, _('Edit'))
 
         # Menu View
         self.menu_view = wx.Menu()
         self.menu_control = wx.Menu()
         self.menu_scanning = wx.Menu()
-        self.menu_scanning_panel = self.menu_scanning.AppendCheckItem(wx.NewId(), _("Panel"))
-        self.menu_scanning_video = self.menu_scanning.AppendCheckItem(wx.NewId(), _("Video"))
-        self.menu_scanning_scene = self.menu_scanning.AppendCheckItem(wx.NewId(), _("Scene"))
-        self.menu_view.AppendMenu(wx.NewId(), _("Scanning"), self.menu_scanning)
-        self.menu_mode_advanced = self.menu_view.AppendCheckItem(wx.NewId(), _("Advanced mode"))
-        self.menu_bar.Append(self.menu_view, _("View"))
+        self.menu_scanning_panel = self.menu_scanning.AppendCheckItem(wx.NewId(), _('Panel'))
+        self.menu_scanning_video = self.menu_scanning.AppendCheckItem(wx.NewId(), _('Video'))
+        self.menu_scanning_scene = self.menu_scanning.AppendCheckItem(wx.NewId(), _('Scene'))
+        self.menu_view.AppendMenu(wx.NewId(), _('Scanning'), self.menu_scanning)
+        self.menu_mode_advanced = self.menu_view.AppendCheckItem(wx.NewId(), _('Advanced mode'))
+        self.menu_bar.Append(self.menu_view, _('View'))
 
         # Menu Help
         self.menu_help = wx.Menu()
-        self.menu_welcome = self.menu_help.Append(wx.ID_ANY, _("Welcome"))
+        self.menu_welcome = self.menu_help.Append(wx.ID_ANY, _('Welcome'))
         if profile.settings['check_for_updates']:
-            self.menu_updates = self.menu_help.Append(wx.ID_ANY, _("Updates"))
-        self.menu_sources = self.menu_help.Append(wx.ID_ANY, _("Sources"))
-        self.menu_about = self.menu_help.Append(wx.ID_ABOUT, _("About"))
-        self.menu_bar.Append(self.menu_help, _("Help"))
+            self.menu_updates = self.menu_help.Append(wx.ID_ANY, _('Updates'))
+        self.menu_sources = self.menu_help.Append(wx.ID_ANY, _('Sources'))
+        self.menu_about = self.menu_help.Append(wx.ID_ABOUT, _('About'))
+        self.menu_bar.Append(self.menu_help, _('Help'))
 
         self.SetMenuBar(self.menu_bar)
 
@@ -152,17 +152,17 @@ class MainWindow(wx.Frame):
         self.Bind(wx.EVT_MENU, self.on_load_model, self.menu_load_model)
         self.Bind(wx.EVT_MENU, self.on_save_model, self.menu_save_model)
         self.Bind(wx.EVT_MENU, self.on_clear_model, self.menu_clear_model)
-        self.Bind(wx.EVT_MENU, lambda e: self.on_open_profile("profile_settings"),
+        self.Bind(wx.EVT_MENU, lambda e: self.on_open_profile('profile_settings'),
                   self.menu_open_profile)
-        self.Bind(wx.EVT_MENU, lambda e: self.on_save_profile("profile_settings"),
+        self.Bind(wx.EVT_MENU, lambda e: self.on_save_profile('profile_settings'),
                   self.menu_save_profile)
-        self.Bind(wx.EVT_MENU, lambda e: self.on_reset_profile("profile_settings"),
+        self.Bind(wx.EVT_MENU, lambda e: self.on_reset_profile('profile_settings'),
                   self.menu_reset_profile)
-        self.Bind(wx.EVT_MENU, lambda e: self.on_open_profile("calibration_settings"),
+        self.Bind(wx.EVT_MENU, lambda e: self.on_open_profile('calibration_settings'),
                   self.menu_open_calibration_profile)
-        self.Bind(wx.EVT_MENU, lambda e: self.on_save_profile("calibration_settings"),
+        self.Bind(wx.EVT_MENU, lambda e: self.on_save_profile('calibration_settings'),
                   self.menu_save_calibration_profile)
-        self.Bind(wx.EVT_MENU, lambda e: self.on_reset_profile("calibration_settings"),
+        self.Bind(wx.EVT_MENU, lambda e: self.on_reset_profile('calibration_settings'),
                   self.menu_reset_calibration_profile)
         self.Bind(wx.EVT_MENU, self.on_export_log, self.menu_export_log)
         self.Bind(wx.EVT_MENU, self.on_clear_log, self.menu_clear_log)
@@ -190,11 +190,11 @@ class MainWindow(wx.Frame):
     def on_load_model(self, event):
         last_file = os.path.split(profile.settings['last_file'])[0]
         dlg = wx.FileDialog(
-            self, _("Open 3D model"), last_file, style=wx.FD_OPEN | wx.FD_FILE_MUST_EXIST)
+            self, _('Open 3D model'), last_file, style=wx.FD_OPEN | wx.FD_FILE_MUST_EXIST)
         wildcard_list = ';'.join(['*' + s for s in mesh_loader.load_supported_extensions()])
-        wildcard_filter = "All (%s)|%s;%s" % (wildcard_list, wildcard_list, wildcard_list.upper())
+        wildcard_filter = 'All (%s)|%s;%s' % (wildcard_list, wildcard_list, wildcard_list.upper())
         wildcard_list = ';'.join(['*' + s for s in mesh_loader.load_supported_extensions()])
-        wildcard_filter += "|Mesh files (%s)|%s;%s" % (wildcard_list, wildcard_list,
+        wildcard_filter += '|Mesh files (%s)|%s;%s' % (wildcard_list, wildcard_list,
                                                        wildcard_list.upper())
         dlg.SetWildcard(wildcard_filter)
         if dlg.ShowModal() == wx.ID_OK:
@@ -208,11 +208,11 @@ class MainWindow(wx.Frame):
         if self.workbench['scanning'].scene_view._object is None or \
            not self.workbench['scanning'].scene_view._object._is_point_cloud:
             return
-        dlg = wx.FileDialog(self, _("Save 3D model"), os.path.split(
+        dlg = wx.FileDialog(self, _('Save 3D model'), os.path.split(
             profile.settings['last_file'])[0], style=wx.FD_SAVE | wx.FD_OVERWRITE_PROMPT)
         file_extensions = mesh_loader.save_supported_extensions()
         wildcard_list = ';'.join(['*' + s for s in file_extensions])
-        wildcard_filter = "Mesh files (%s)|%s;%s" % (wildcard_list, wildcard_list,
+        wildcard_filter = 'Mesh files (%s)|%s;%s' % (wildcard_list, wildcard_list,
                                                      wildcard_list.upper())
         dlg.SetWildcard(wildcard_filter)
         if dlg.ShowModal() == wx.ID_OK:
@@ -228,17 +228,17 @@ class MainWindow(wx.Frame):
         if self.workbench['scanning'].scene_view._object is not None:
             dlg = wx.MessageDialog(
                 self,
-                _("Your current model will be deleted.\nAre you sure you want to delete it?"),
-                _("Clear point cloud"), wx.YES_NO | wx.ICON_QUESTION)
+                _('Your current model will be deleted.\nAre you sure you want to delete it?'),
+                _('Clear point cloud'), wx.YES_NO | wx.ICON_QUESTION)
             result = dlg.ShowModal() == wx.ID_YES
             dlg.Destroy()
             if result:
                 self.workbench['scanning'].scene_view._clear_scene()
 
     def on_open_profile(self, category):
-        dlg = wx.FileDialog(self, _("Select profile file to load"), profile.get_base_path(),
+        dlg = wx.FileDialog(self, _('Select profile file to load'), profile.get_base_path(),
                             style=wx.FD_OPEN | wx.FD_FILE_MUST_EXIST)
-        dlg.SetWildcard("JSON files (*.json)|*.json")
+        dlg.SetWildcard('JSON files (*.json)|*.json')
         if dlg.ShowModal() == wx.ID_OK:
             profile_file = dlg.GetPath()
             profile.settings.load_settings(profile_file, categories=[category])
@@ -246,9 +246,9 @@ class MainWindow(wx.Frame):
         dlg.Destroy()
 
     def on_save_profile(self, category):
-        dlg = wx.FileDialog(self, _("Select profile file to save"), profile.get_base_path(),
+        dlg = wx.FileDialog(self, _('Select profile file to save'), profile.get_base_path(),
                             category.replace('_settings', ''), style=wx.FD_SAVE)
-        dlg.SetWildcard("JSON files (*.json)|*.json")
+        dlg.SetWildcard('JSON files (*.json)|*.json')
         if dlg.ShowModal() == wx.ID_OK:
             profile_file = dlg.GetPath()
             if not profile_file.endswith('.json'):
@@ -260,10 +260,10 @@ class MainWindow(wx.Frame):
     def on_reset_profile(self, category):
         dlg = wx.MessageDialog(
             self,
-            _("This will reset all profile settings to defaults. "
-              "Unless you have saved your current profile, all settings will be lost!\n"
-              "Do you really want to reset?"),
-            _("Profile reset"), wx.YES_NO | wx.ICON_QUESTION)
+            _('This will reset all profile settings to defaults. '
+              'Unless you have saved your current profile, all settings will be lost!\n'
+              'Do you really want to reset?'),
+            _('Profile reset'), wx.YES_NO | wx.ICON_QUESTION)
         result = dlg.ShowModal() == wx.ID_YES
         dlg.Destroy()
         if result:
@@ -273,9 +273,9 @@ class MainWindow(wx.Frame):
     def on_clear_log(self, event):
         dlg = wx.MessageDialog(
             self,
-            _("Your current log file will be deleted.\n"
-              "Are you sure you want to delete it?"),
-            _("Clear log file"), wx.YES_NO | wx.ICON_QUESTION)
+            _('Your current log file will be deleted.\n'
+              'Are you sure you want to delete it?'),
+            _('Clear log file'), wx.YES_NO | wx.ICON_QUESTION)
         result = dlg.ShowModal() == wx.ID_YES
         dlg.Destroy()
         if result:
@@ -286,9 +286,9 @@ class MainWindow(wx.Frame):
             profile.settings['last_clear_log_date'] = str(current_log_date.strftime(date_format))
 
     def on_export_log(self, event):
-        dlg = wx.FileDialog(self, _("Select log file to save"),
+        dlg = wx.FileDialog(self, _('Select log file to save'),
                             profile.get_base_path(), style=wx.FD_SAVE)
-        dlg.SetWildcard("Log files (*.log)|*.log")
+        dlg.SetWildcard('Log files (*.log)|*.log')
         if dlg.ShowModal() == wx.ID_OK:
             log_file = dlg.GetPath()
             if not log_file.endswith('.log'):
@@ -356,8 +356,8 @@ class MainWindow(wx.Frame):
                 self.workbench['scanning'].scene_view._draw_machine()
             except:
                 pass
-            profile.settings.save_settings(categories=["machine_settings"])
-            self.workbench['scanning'].controls.panels["point_cloud_roi"].update_profile()"""
+            profile.settings.save_settings(categories=['machine_settings'])
+            self.workbench['scanning'].controls.panels['point_cloud_roi'].update_profile()"""
 
     def on_menu_view_clicked(self, key, checked, panel):
         profile.settings[key] = checked
@@ -470,7 +470,7 @@ class MainWindow(wx.Frame):
 
     def on_about(self, event):
         info = wx.AboutDialogInfo()
-        icon = wx.Icon(resources.get_path_for_image("horus.ico"), wx.BITMAP_TYPE_ICO)
+        icon = wx.Icon(resources.get_path_for_image('horus.ico'), wx.BITMAP_TYPE_ICO)
         info.SetIcon(icon)
         info.SetName('Horus')
         info.SetVersion(__version__)
@@ -481,17 +481,17 @@ class MainWindow(wx.Frame):
         info.SetDescription(tech_description)
         info.SetCopyright('(C) 2014-2016 Mundo Reader S.L.')
         info.SetWebSite('http://www.bq.com')
-        info.SetLicence("Horus is free software; you can redistribute it and/or modify it\n"
-                        "under the terms of the GNU General Public License as published by\n"
-                        "the Free Software Foundation; either version 2 of the License,\n"
-                        "or (at your option) any later version.\n"
-                        "Horus is distributed in the hope that it will be useful,\n"
-                        "but WITHOUT ANY WARRANTY; without even the implied warranty of\n"
-                        "MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n"
-                        "See the GNU General Public License for more details. You should have\n"
-                        "received a copy of the GNU General Public License along with\n"
-                        "File Hunter; if not, write to the Free Software Foundation,\n"
-                        "Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA")
+        info.SetLicence('Horus is free software; you can redistribute it and/or modify it\n'
+                        'under the terms of the GNU General Public License as published by\n'
+                        'the Free Software Foundation; either version 2 of the License,\n'
+                        'or (at your option) any later version.\n'
+                        'Horus is distributed in the hope that it will be useful,\n'
+                        'but WITHOUT ANY WARRANTY; without even the implied warranty of\n'
+                        'MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n'
+                        'See the GNU General Public License for more details. You should have\n'
+                        'received a copy of the GNU General Public License along with\n'
+                        'File Hunter; if not, write to the Free Software Foundation,\n'
+                        'Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA')
         info.AddDeveloper('Jesús Arroyo, Irene Sanz, Jorge Robles')
         info.AddDocWriter('Jesús Arroyo, Ángel Larrañaga')
         info.AddArtist('Nestor Toribio')
@@ -508,28 +508,28 @@ class MainWindow(wx.Frame):
             if version.check_for_updates():
                 VersionWindow(self)
             else:
-                dlg = wx.MessageDialog(self, _("You are running the latest version of Horus!"), _(
-                    "Updated!"), wx.OK | wx.ICON_INFORMATION)
+                dlg = wx.MessageDialog(self, _('You are running the latest version of Horus!'), _(
+                    'Updated!'), wx.OK | wx.ICON_INFORMATION)
                 dlg.ShowModal()
                 dlg.Destroy()
 
     def on_board_unplugged(self):
         self._on_device_unplugged(
-            _("Scanner unplugged"),
-            _("Scanner has been unplugged. Please, plug it in and press connect"))
+            _('Scanner unplugged'),
+            _('Scanner has been unplugged. Please, plug it in and press connect'))
         """self._on_device_unplugged(
-            _("Board unplugged"),
-            _("Board has been unplugged. Please, plug it in and press connect"))"""
+            _('Board unplugged'),
+            _('Board has been unplugged. Please, plug it in and press connect'))"""
 
     def on_camera_unplugged(self):
         self._on_device_unplugged(
-            _("Scanner unplugged"),
-            _("Scanner has been unplugged. Please, plug it in and press connect"))
+            _('Scanner unplugged'),
+            _('Scanner has been unplugged. Please, plug it in and press connect'))
         """self._on_device_unplugged(
-            _("Camera unplugged"),
-            _("Camera has been unplugged. Please, plug it in and press connect"))"""
+            _('Camera unplugged'),
+            _('Camera has been unplugged. Please, plug it in and press connect'))"""
 
-    def _on_device_unplugged(self, title="", description=""):
+    def _on_device_unplugged(self, title='', description=''):
         ciclop_scan.stop()
         scanner_autocheck.cancel()
         laser_triangulation.cancel()

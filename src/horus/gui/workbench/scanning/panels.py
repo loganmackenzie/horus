@@ -18,7 +18,7 @@ class ScanParameters(ExpandablePanel):
 
     def __init__(self, parent, on_selected_callback):
         ExpandablePanel.__init__(
-            self, parent, _("Scan parameters"), has_undo=False, has_restore=False)
+            self, parent, _('Scan parameters'), has_undo=False, has_restore=False)
         self.main = self.GetParent().GetParent().GetParent()
 
     def add_controls(self):
@@ -43,14 +43,14 @@ class RotatingPlatform(ExpandablePanel):
 
     def __init__(self, parent, on_selected_callback):
         ExpandablePanel.__init__(
-            self, parent, _("Rotating platform"), has_undo=False)
+            self, parent, _('Rotating platform'), has_undo=False)
         self.main = self.GetParent().GetParent().GetParent()
 
     def add_controls(self):
         self.add_control(
             'show_center', CheckBox,
-            _("Shows the center of the platform using the "
-              "current calibration parameters"))
+            _('Shows the center of the platform using the '
+              'current calibration parameters'))
         self.add_control('motor_step_scanning', FloatTextBox)
         self.add_control('motor_speed_scanning', FloatTextBox)
         self.add_control('motor_acceleration_scanning', FloatTextBox)
@@ -70,16 +70,16 @@ class RotatingPlatform(ExpandablePanel):
 class PointCloudROI(ExpandablePanel):
 
     def __init__(self, parent, on_selected_callback):
-        ExpandablePanel.__init__(self, parent, _("Point cloud ROI"))
+        ExpandablePanel.__init__(self, parent, _('Point cloud ROI'))
         self.main = self.GetParent().GetParent().GetParent()
 
     def add_controls(self):
         self.add_control(
             'use_roi', CheckBox,
-            _("Use a Region Of Interest (ROI). "
-              "This cylindrical region is the one being scanned. "
-              "All information outside won't be taken into account "
-              "during the scanning process"))
+            _('Use a Region Of Interest (ROI). '
+              'This cylindrical region is the one being scanned. '
+              'All information outside won\'t be taken into account '
+              'during the scanning process'))
         self.add_control('roi_diameter', Slider)
         self.add_control('roi_height', Slider)
         # self.add_control('roi_depth', Slider)
@@ -124,7 +124,7 @@ class PointCloudColor(ExpandablePanel):
 
     def __init__(self, parent, on_selected_callback):
         ExpandablePanel.__init__(
-            self, parent, _("Point cloud color"), has_undo=False, has_restore=False)
+            self, parent, _('Point cloud color'), has_undo=False, has_restore=False)
         self.main = self.GetParent().GetParent().GetParent()
 
     def add_controls(self):
@@ -142,7 +142,7 @@ class PointCloudColor(ExpandablePanel):
             data = dialog.GetColourData()
             color = data.GetColour().Get()
             ciclop_scan.color = color
-            profile.settings['point_cloud_color'] = str("".join(map(chr, color)).encode('hex'))
+            profile.settings['point_cloud_color'] = str(''.join(map(chr, color)).encode('hex'))
         dialog.Destroy()
 
     def on_selected(self):

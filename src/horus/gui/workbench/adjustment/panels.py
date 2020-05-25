@@ -18,50 +18,50 @@ current_video = CurrentVideo()
 class ScanCapturePanel(ExpandablePanel):
 
     def __init__(self, parent, on_selected_callback):
-        ExpandablePanel.__init__(self, parent, _("Scan capture"))
+        ExpandablePanel.__init__(self, parent, _('Scan capture'))
 
     def add_controls(self):
         self.add_control('capture_mode_scanning', ComboBox)
         self.add_control(
             'brightness_texture_scanning', Slider,
-            _("Image luminosity. Low values are better for environments with high ambient "
-              "light conditions. High values are recommended for poorly lit places"))
+            _('Image luminosity. Low values are better for environments with high ambient '
+              'light conditions. High values are recommended for poorly lit places'))
         self.add_control(
             'contrast_texture_scanning', Slider,
-            _("Relative difference in intensity between an image point and its "
-              "surroundings. Low values are recommended for black or very dark colored "
-              "objects. High values are better for very light colored objects"))
+            _('Relative difference in intensity between an image point and its '
+              'surroundings. Low values are recommended for black or very dark colored '
+              'objects. High values are better for very light colored objects'))
         self.add_control(
             'saturation_texture_scanning', Slider,
-            _("Purity of color. Low values will cause colors to disappear from the image. "
-              "High values will show an image with very intense colors"))
+            _('Purity of color. Low values will cause colors to disappear from the image. '
+              'High values will show an image with very intense colors'))
         self.add_control(
             'exposure_texture_scanning', Slider,
-            _("Amount of light per unit area. It is controlled by the time the camera "
-              "sensor is exposed during a frame capture. "
-              "High values are recommended for poorly lit places"))
+            _('Amount of light per unit area. It is controlled by the time the camera '
+              'sensor is exposed during a frame capture. '
+              'High values are recommended for poorly lit places'))
         self.add_control(
             'brightness_laser_scanning', Slider,
-            _("Image luminosity. Low values are better for environments with high ambient "
-              "light conditions. High values are recommended for poorly lit places"))
+            _('Image luminosity. Low values are better for environments with high ambient '
+              'light conditions. High values are recommended for poorly lit places'))
         self.add_control(
             'contrast_laser_scanning', Slider,
-            _("Relative difference in intensity between an image point and its "
-              "surroundings. Low values are recommended for black or very dark colored "
-              "objects. High values are better for very light colored objects"))
+            _('Relative difference in intensity between an image point and its '
+              'surroundings. Low values are recommended for black or very dark colored '
+              'objects. High values are better for very light colored objects'))
         self.add_control(
             'saturation_laser_scanning', Slider,
-            _("Purity of color. Low values will cause colors to disappear from the image. "
-              "High values will show an image with very intense colors"))
+            _('Purity of color. Low values will cause colors to disappear from the image. '
+              'High values will show an image with very intense colors'))
         self.add_control(
             'exposure_laser_scanning', Slider,
-            _("Amount of light per unit area. It is controlled by the time the camera "
-              "sensor is exposed during a frame capture. "
-              "High values are recommended for poorly lit places"))
+            _('Amount of light per unit area. It is controlled by the time the camera '
+              'sensor is exposed during a frame capture. '
+              'High values are recommended for poorly lit places'))
         self.add_control(
             'remove_background_scanning', CheckBox,
-            _("Capture an extra image without laser to remove "
-              "the background in the laser's image"))
+            _('Capture an extra image without laser to remove '
+              'the background in the laser\'s image'))
 
         # Initial layout
         self._set_mode_layout(profile.settings['capture_mode_scanning'])
@@ -146,28 +146,28 @@ class ScanCapturePanel(ExpandablePanel):
 class ScanSegmentationPanel(ExpandablePanel):
 
     def __init__(self, parent, on_selected_callback):
-        ExpandablePanel.__init__(self, parent, _("Scan segmentation"))
+        ExpandablePanel.__init__(self, parent, _('Scan segmentation'))
 
     def add_controls(self):
         # self.add_control('red_channel_scanning', ComboBox)
         self.add_control(
             'threshold_value_scanning', Slider,
-            _("Remove all pixels which intensity is less that the threshold value"))
+            _('Remove all pixels which intensity is less that the threshold value'))
         self.add_control(
             'threshold_enable_scanning', CheckBox,
-            _("Remove all pixels which intensity is less that the threshold value"))
+            _('Remove all pixels which intensity is less that the threshold value'))
         self.add_control(
             'blur_value_scanning', Slider,
-            _("Blur with Normalized box filter. Kernel size: 2 * value + 1"))
+            _('Blur with Normalized box filter. Kernel size: 2 * value + 1'))
         self.add_control(
             'blur_enable_scanning', CheckBox,
-            _("Blur with Normalized box filter. Kernel size: 2 * value + 1"))
+            _('Blur with Normalized box filter. Kernel size: 2 * value + 1'))
         self.add_control(
             'window_value_scanning', Slider,
-            _("Filter pixels out of 2 * window value around the intensity peak"))
+            _('Filter pixels out of 2 * window value around the intensity peak'))
         self.add_control(
             'window_enable_scanning', CheckBox,
-            _("Filter pixels out of 2 * window value around the intensity peak"))
+            _('Filter pixels out of 2 * window value around the intensity peak'))
         self.add_control('refinement_scanning', ComboBox)
 
     def update_callbacks(self):
@@ -208,50 +208,50 @@ class ScanSegmentationPanel(ExpandablePanel):
 class CalibrationCapturePanel(ExpandablePanel):
 
     def __init__(self, parent, on_selected_callback):
-        ExpandablePanel.__init__(self, parent, _("Calibration capture"))
+        ExpandablePanel.__init__(self, parent, _('Calibration capture'))
 
     def add_controls(self):
         self.add_control('capture_mode_calibration', ComboBox)
         self.add_control(
             'brightness_pattern_calibration', Slider,
-            _("Image luminosity. Low values are better for environments with high ambient "
-              "light conditions. High values are recommended for poorly lit places"))
+            _('Image luminosity. Low values are better for environments with high ambient '
+              'light conditions. High values are recommended for poorly lit places'))
         self.add_control(
             'contrast_pattern_calibration', Slider,
-            _("Relative difference in intensity between an image point and its "
-              "surroundings. Low values are recommended for black or very dark colored "
-              "objects. High values are better for very light colored objects"))
+            _('Relative difference in intensity between an image point and its '
+              'surroundings. Low values are recommended for black or very dark colored '
+              'objects. High values are better for very light colored objects'))
         self.add_control(
             'saturation_pattern_calibration', Slider,
-            _("Purity of color. Low values will cause colors to disappear from the image. "
-              "High values will show an image with very intense colors"))
+            _('Purity of color. Low values will cause colors to disappear from the image. '
+              'High values will show an image with very intense colors'))
         self.add_control(
             'exposure_pattern_calibration', Slider,
-            _("Amount of light per unit area. It is controlled by the time the camera "
-              "sensor is exposed during a frame capture. "
-              "High values are recommended for poorly lit places"))
+            _('Amount of light per unit area. It is controlled by the time the camera '
+              'sensor is exposed during a frame capture. '
+              'High values are recommended for poorly lit places'))
         self.add_control(
             'brightness_laser_calibration', Slider,
-            _("Image luminosity. Low values are better for environments with high ambient "
-              "light conditions. High values are recommended for poorly lit places"))
+            _('Image luminosity. Low values are better for environments with high ambient '
+              'light conditions. High values are recommended for poorly lit places'))
         self.add_control(
             'contrast_laser_calibration', Slider,
-            _("Relative difference in intensity between an image point and its "
-              "surroundings. Low values are recommended for black or very dark colored "
-              "objects. High values are better for very light colored objects"))
+            _('Relative difference in intensity between an image point and its '
+              'surroundings. Low values are recommended for black or very dark colored '
+              'objects. High values are better for very light colored objects'))
         self.add_control(
             'saturation_laser_calibration', Slider,
-            _("Purity of color. Low values will cause colors to disappear from the image. "
-              "High values will show an image with very intense colors"))
+            _('Purity of color. Low values will cause colors to disappear from the image. '
+              'High values will show an image with very intense colors'))
         self.add_control(
             'exposure_laser_calibration', Slider,
-            _("Amount of light per unit area. It is controlled by the time the camera "
-              "sensor is exposed during a frame capture. "
-              "High values are recommended for poorly lit places"))
+            _('Amount of light per unit area. It is controlled by the time the camera '
+              'sensor is exposed during a frame capture. '
+              'High values are recommended for poorly lit places'))
         self.add_control(
             'remove_background_calibration', CheckBox,
-            _("Capture an extra image without laser to remove "
-              "the background in the laser's image"))
+            _('Capture an extra image without laser to remove '
+              'the background in the laser\'s image'))
 
         # Initial layout
         self._set_mode_layout(profile.settings['capture_mode_calibration'])
@@ -336,28 +336,28 @@ class CalibrationCapturePanel(ExpandablePanel):
 class CalibrationSegmentationPanel(ExpandablePanel):
 
     def __init__(self, parent, on_selected_callback):
-        ExpandablePanel.__init__(self, parent, _("Calibration segmentation"))
+        ExpandablePanel.__init__(self, parent, _('Calibration segmentation'))
 
     def add_controls(self):
         # self.add_control('red_channel_calibration', ComboBox)
         self.add_control(
             'threshold_value_calibration', Slider,
-            _("Remove all pixels which intensity is less that the threshold value"))
+            _('Remove all pixels which intensity is less that the threshold value'))
         self.add_control(
             'threshold_enable_calibration', CheckBox,
-            _("Remove all pixels which intensity is less that the threshold value"))
+            _('Remove all pixels which intensity is less that the threshold value'))
         self.add_control(
             'blur_value_calibration', Slider,
-            _("Blur with Normalized box filter. Kernel size: 2 * value + 1"))
+            _('Blur with Normalized box filter. Kernel size: 2 * value + 1'))
         self.add_control(
             'blur_enable_calibration', CheckBox,
-            _("Blur with Normalized box filter. Kernel size: 2 * value + 1"))
+            _('Blur with Normalized box filter. Kernel size: 2 * value + 1'))
         self.add_control(
             'window_value_calibration', Slider,
-            _("Filter pixels out of 2 * window value around the intensity peak"))
+            _('Filter pixels out of 2 * window value around the intensity peak'))
         self.add_control(
             'window_enable_calibration', CheckBox,
-            _("Filter pixels out of 2 * window value around the intensity peak"))
+            _('Filter pixels out of 2 * window value around the intensity peak'))
         self.add_control('refinement_calibration', ComboBox)
 
     def update_callbacks(self):

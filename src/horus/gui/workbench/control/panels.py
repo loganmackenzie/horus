@@ -17,28 +17,28 @@ from horus.gui.util.custom_panels import ExpandablePanel, ControlPanel, Slider, 
 class CameraControl(ExpandablePanel):
 
     def __init__(self, parent, on_selected_callback):
-        ExpandablePanel.__init__(self, parent, _("Camera control"))
+        ExpandablePanel.__init__(self, parent, _('Camera control'))
         self.current_framerate = None
 
     def add_controls(self):
         self.add_control(
             'brightness_control', Slider,
-            _("Image luminosity. Low values are better for environments with high ambient "
-              "light conditions. High values are recommended for poorly lit places"))
+            _('Image luminosity. Low values are better for environments with high ambient '
+              'light conditions. High values are recommended for poorly lit places'))
         self.add_control(
             'contrast_control', Slider,
-            _("Relative difference in intensity between an image point and its "
-              "surroundings. Low values are recommended for black or very dark colored "
-              "objects. High values are better for very light colored objects"))
+            _('Relative difference in intensity between an image point and its '
+              'surroundings. Low values are recommended for black or very dark colored '
+              'objects. High values are better for very light colored objects'))
         self.add_control(
             'saturation_control', Slider,
-            _("Purity of color. Low values will cause colors to disappear from the image. "
-              "High values will show an image with very intense colors"))
+            _('Purity of color. Low values will cause colors to disappear from the image. '
+              'High values will show an image with very intense colors'))
         self.add_control(
             'exposure_control', Slider,
-            _("Amount of light per unit area. It is controlled by the time the camera "
-              "sensor is exposed during a frame capture. "
-              "High values are recommended for poorly lit places"))
+            _('Amount of light per unit area. It is controlled by the time the camera '
+              'sensor is exposed during a frame capture. '
+              'High values are recommended for poorly lit places'))
         self.add_control('save_image_button', Button)
 
     def update_callbacks(self):
@@ -53,9 +53,9 @@ class CameraControl(ExpandablePanel):
 
     def _save_image(self):
         image = driver.camera.capture_image()
-        dlg = wx.FileDialog(self, _("Save image"), style=wx.FD_SAVE | wx.FD_OVERWRITE_PROMPT)
+        dlg = wx.FileDialog(self, _('Save image'), style=wx.FD_SAVE | wx.FD_OVERWRITE_PROMPT)
         wildcard_list = ';'.join(['*' + s for s in ['.png']])
-        wildcard_filter = "Image files (%s)|%s;%s" % (wildcard_list, wildcard_list,
+        wildcard_filter = 'Image files (%s)|%s;%s' % (wildcard_list, wildcard_list,
                                                       wildcard_list.upper())
         dlg.SetWildcard(wildcard_filter)
         if dlg.ShowModal() == wx.ID_OK:
@@ -71,7 +71,7 @@ class LaserControl(ExpandablePanel):
 
     def __init__(self, parent, on_selected_callback):
         ExpandablePanel.__init__(
-            self, parent, _("Laser control"), has_undo=False, has_restore=False)
+            self, parent, _('Laser control'), has_undo=False, has_restore=False)
 
     def add_controls(self):
         self.add_control('left_button', ToggleButton)
@@ -93,7 +93,7 @@ class LDRControl(ExpandablePanel):
 
     def __init__(self, parent, on_selected_callback):
         ExpandablePanel.__init__(
-            self, parent, _("LDR control"), has_undo=False, has_restore=False)
+            self, parent, _('LDR control'), has_undo=False, has_restore=False)
 
     def add_controls(self):
         self.add_control('ldr_value', LDRSection)
@@ -158,7 +158,7 @@ class LDRSection(ControlPanel):
 class MotorControl(ExpandablePanel):
 
     def __init__(self, parent, on_selected_callback):
-        ExpandablePanel.__init__(self, parent, _("Motor control"), has_undo=False)
+        ExpandablePanel.__init__(self, parent, _('Motor control'), has_undo=False)
 
     def add_controls(self):
         self.add_control('motor_step_control', FloatTextBox)
@@ -188,7 +188,7 @@ class GcodeControl(ExpandablePanel):
 
     def __init__(self, parent, on_selected_callback):
         ExpandablePanel.__init__(
-            self, parent, _("Gcode Control"), has_undo=False, has_restore=False)
+            self, parent, _('Gcode Control'), has_undo=False, has_restore=False)
 
     def add_controls(self):
         self.add_control('gcode_gui', GcodeSection)

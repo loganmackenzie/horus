@@ -20,19 +20,19 @@ system = platform.system()
 class WrongFirmware(Exception):
 
     def __init__(self):
-        Exception.__init__(self, "Wrong Firmware")
+        Exception.__init__(self, 'Wrong Firmware')
 
 
 class BoardNotConnected(Exception):
 
     def __init__(self):
-        Exception.__init__(self, "Board Not Connected")
+        Exception.__init__(self, 'Board Not Connected')
 
 
 class OldFirmware(Exception):
 
     def __init__(self):
-        Exception.__init__(self, "Old Firmware")
+        Exception.__init__(self, 'Old Firmware')
 
 
 class Board(object):
@@ -71,7 +71,7 @@ class Board(object):
 
     def connect(self):
         """Open serial port and perform handshake"""
-        logger.info("Connecting board {0} {1}".format(self.serial_name, self.baud_rate))
+        logger.info('Connecting board {0} {1}'.format(self.serial_name, self.baud_rate))
         self._is_connected = False
         try:
             self._serial_port = serial.Serial(self.serial_name, self.baud_rate, timeout=2)
@@ -86,20 +86,20 @@ class Board(object):
                     self._is_connected = True
                     # Set current position as origin
                     self.motor_reset_origin()
-                    logger.info(" Done")
+                    logger.info(' Done')
                 else:
                     raise WrongFirmware()
             else:
                 raise BoardNotConnected()
         except Exception as exception:
-            logger.error("Error opening the port {0}\n".format(self.serial_name))
+            logger.error('Error opening the port {0}\n'.format(self.serial_name))
             self._serial_port = None
             raise exception
 
     def disconnect(self):
         """Close serial port"""
         if self._is_connected:
-            logger.info("Disconnecting board {0}".format(self.serial_name))
+            logger.info('Disconnecting board {0}'.format(self.serial_name))
             try:
                 if self._serial_port is not None:
                     self.lasers_off()
@@ -108,8 +108,8 @@ class Board(object):
                     self._serial_port.close()
                     del self._serial_port
             except serial.SerialException:
-                logger.error("Error closing the port {0}\n".format(self.serial_name))
-            logger.info(" Done")
+                logger.error('Error closing the port {0}\n'.format(self.serial_name))
+            logger.info(' Done')
 
     def set_unplug_callback(self, value):
         self.unplug_callback = value
@@ -124,13 +124,13 @@ class Board(object):
         if self._is_connected:
             if self._motor_speed != value:
                 self._motor_speed = value
-                self._send_command("G1F{0}".format(value))
+                self._send_command('G1F{0}'.format(value))
 
     def motor_acceleration(self, value):
         if self._is_connected:
             if self._motor_acceleration != value:
                 self._motor_acceleration = value
-                self._send_command("$120={0}".format(value))
+                self._send_command('$120={0}'.format(value))
 
     def motor_enable(self):
         if self._is_connected:
@@ -140,7 +140,7 @@ class Board(object):
                 speed = self._motor_speed
                 self.motor_speed(1)
                 # Enable stepper motor
-                self._send_command("M17")
+                self._send_command('M17')
                 time.sleep(1)
                 # Restore speed value
                 self.motor_speed(speed)
@@ -149,29 +149,29 @@ class Board(object):
         if self._is_connected:
             if self._motor_enabled:
                 self._motor_enabled = False
-                self._send_command("M18")
+                self._send_command('M18')
 
     def motor_reset_origin(self):
         if self._is_connected:
-            self._send_command("G50")
+            self._send_command('G50')
             self._motor_position = 0
 
     def motor_move(self, step=0, nonblocking=False, callback=None):
         if self._is_connected:
             self._motor_position += step * self._motor_direction
-            self.send_command("G1X{0}".format(self._motor_position), nonblocking, callback)
+            self.send_command('G1X{0}'.format(self._motor_position), nonblocking, callback)
 
     def laser_on(self, index):
         if self._is_connected:
             if not self._laser_enabled[index]:
                 self._laser_enabled[index] = True
-                self._send_command("M71T" + str(index + 1))
+                self._send_command('M71T' + str(index + 1))
 
     def laser_off(self, index):
         if self._is_connected:
             if self._laser_enabled[index]:
                 self._laser_enabled[index] = False
-                self._send_command("M70T" + str(index + 1))
+                self._send_command('M70T' + str(index + 1))
 
     def lasers_on(self):
         for i in range(self._laser_number):
@@ -182,7 +182,7 @@ class Board(object):
             self.laser_off(i)
 
     def ldr_sensor(self, pin):
-        value = self._send_command("M50T" + pin, read_lines=True).split("\n")[0]
+        value = self._send_command('M50T' + pin, read_lines=True).split('\n')[0]
         try:
             return int(value)
         except ValueError:
@@ -203,7 +203,7 @@ class Board(object):
                 try:
                     self._serial_port.flushInput()
                     self._serial_port.flushOutput()
-                    self._serial_port.write(req + "\r\n")
+                    self._serial_port.write(req + '\r\n')
                     while req != '~' and req != '!' and ret == '':
                         ret = self.read(read_lines)
                         time.sleep(0.01)
@@ -228,7 +228,7 @@ class Board(object):
 
     def _fail(self):
         if self._is_connected:
-            logger.debug("Board fail")
+            logger.debug('Board fail')
             self._tries += 1
             if self._tries >= 3:
                 self._tries = 0
@@ -241,7 +241,7 @@ class Board(object):
     def _reset(self):
         self._serial_port.flushInput()
         self._serial_port.flushOutput()
-        self._serial_port.write("\x18\r\n")  # Ctrl-x
+        self._serial_port.write('\x18\r\n')  # Ctrl-x
         self._serial_port.readline()
 
     def get_serial_list(self):
@@ -251,7 +251,7 @@ class Board(object):
             import winreg
             try:
                 key = winreg.OpenKey(
-                    winreg.HKEY_LOCAL_MACHINE, "HARDWARE\\DEVICEMAP\\SERIALCOMM")
+                    winreg.HKEY_LOCAL_MACHINE, 'HARDWARE\\DEVICEMAP\\SERIALCOMM')
                 i = 0
                 while True:
                     try:

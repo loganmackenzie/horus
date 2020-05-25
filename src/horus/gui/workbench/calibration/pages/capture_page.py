@@ -19,12 +19,12 @@ class CapturePage(Page):
 
     def __init__(self, parent, start_callback=None):
         Page.__init__(self, parent,
-                      title=_("Camera intrinsics (advanced)"),
-                      desc=_("Default values are recommended. To perform the calibration, "
-                             "click over the video panel and press "
-                             "space bar to perform the captures."),
-                      left=_("Reset"),
-                      right=_("Start"),
+                      title=_('Camera intrinsics (advanced)'),
+                      desc=_('Default values are recommended. To perform the calibration, '
+                             'click over the video panel and press '
+                             'space bar to perform the captures.'),
+                      left=_('Reset'),
+                      right=_('Start'),
                       button_left_callback=self.initialize,
                       button_right_callback=start_callback,
                       view_progress=True)
@@ -56,15 +56,15 @@ class CapturePage(Page):
 
     def initialize(self):
         self.desc_text.SetLabel(
-            _("Default values are recommended. To perform the calibration, "
-              "click over the video panel and press "
-              "space bar to perform the captures."))
+            _('Default values are recommended. To perform the calibration, '
+              'click over the video panel and press '
+              'space bar to perform the captures.'))
         self.current_grid = 0
         self.gauge.SetValue(0)
         camera_intrinsics.reset()
         for panel in range(self.rows * self.columns):
             self.panel_grid[panel].SetBackgroundColour((221, 221, 221))
-            self.panel_grid[panel].set_image(wx.Image(resources.get_path_for_image("void.png")))
+            self.panel_grid[panel].set_image(wx.Image(resources.get_path_for_image('void.png')))
 
     def play(self):
         self.gauge.SetValue(0)
@@ -100,6 +100,6 @@ class CapturePage(Page):
             self.panel_grid[self.current_grid].set_frame(image)
             self.current_grid += 1
         if self.current_grid is (self.columns * self.rows):
-            self.desc_text.SetLabel(_("Press space bar to continue"))
+            self.desc_text.SetLabel(_('Press space bar to continue'))
             if self.button_right_callback is not None:
                 self.button_right_callback()

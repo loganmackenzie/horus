@@ -68,9 +68,9 @@ class GLShader(GLReferenceCounter):
             # Validation has to occur *after* linking
             glValidateProgram(self._program)
             if glGetProgramiv(self._program, GL_VALIDATE_STATUS) == GL_FALSE:
-                raise RuntimeError("Validation failure: %s" % (glGetProgramInfoLog(self._program)))
+                raise RuntimeError('Validation failure: %s' % (glGetProgramInfoLog(self._program)))
             if glGetProgramiv(self._program, GL_LINK_STATUS) == GL_FALSE:
-                raise RuntimeError("Link failure: %s" % (glGetProgramInfoLog(self._program)))
+                raise RuntimeError('Link failure: %s' % (glGetProgramInfoLog(self._program)))
             glDeleteShader(vertex_shader)
             glDeleteShader(fragment_shader)
         except RuntimeError as err:
@@ -111,7 +111,7 @@ class GLShader(GLReferenceCounter):
 
     def __del__(self):
         if self._program is not None and bool(glDeleteProgram):
-            logger.warning("Shader was not properly released!")
+            logger.warning('Shader was not properly released!')
 
 
 class GLFakeShader(GLReferenceCounter):
@@ -288,7 +288,7 @@ class GLVBO(GLReferenceCounter):
 
     def __del__(self):
         if self._buffer is not None and bool(glDeleteBuffers):
-            logger.warning("VBO was not properly released!")
+            logger.warning('VBO was not properly released!')
 
 
 def unproject(winx, winy, winz, model_matrix, proj_matrix, viewport):

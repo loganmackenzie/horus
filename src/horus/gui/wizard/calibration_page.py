@@ -21,19 +21,19 @@ class CalibrationPage(WizardPage):
 
     def __init__(self, parent, button_prev_callback=None, button_next_callback=None):
         WizardPage.__init__(self, parent,
-                            title=_("Calibration"),
+                            title=_('Calibration'),
                             button_prev_callback=button_prev_callback,
                             button_next_callback=button_next_callback)
 
         self.parent = parent
 
         self.pattern_label = wx.StaticText(self.panel, label=_(
-            "Put the pattern on the platform as shown in the picture and press \"Calibrate\""))
+            'Put the pattern on the platform as shown in the picture and press "Calibrate"'))
         self.pattern_label.Wrap(400)
         self.image_view = ImageView(self.panel, quality=wx.IMAGE_QUALITY_HIGH)
-        self.image_view.set_image(wx.Image(resources.get_path_for_image("pattern-position.png")))
-        self.calibrate_button = wx.Button(self.panel, label=_("Calibrate"))
-        self.cancel_button = wx.Button(self.panel, label=_("Cancel"))
+        self.image_view.set_image(wx.Image(resources.get_path_for_image('pattern-position.png')))
+        self.calibrate_button = wx.Button(self.panel, label=_('Calibrate'))
+        self.cancel_button = wx.Button(self.panel, label=_('Cancel'))
         self.gauge = wx.Gauge(self.panel, range=100, size=(-1, 30))
         self.result_label = wx.StaticText(self.panel, size=(-1, 30))
 
@@ -102,7 +102,7 @@ class CalibrationPage(WizardPage):
         camera_unplug_callback = driver.camera.unplug_callback
         driver.board.set_unplug_callback(None)
         driver.camera.set_unplug_callback(None)
-        self.result_label.SetLabel(_("Calibration canceled. To try again press \"Calibrate\""))
+        self.result_label.SetLabel(_('Calibration canceled. To try again press "Calibrate"'))
         combo_calibration.cancel()
         self.skip_button.Enable()
         self.on_finish_calibration()
@@ -148,14 +148,14 @@ class CalibrationPage(WizardPage):
         else:
             if isinstance(result, ComboCalibrationError):
                 self.result_label.SetLabel(
-                    _("Check the pattern and the lasers and try again"))
+                    _('Check the pattern and the lasers and try again'))
                 dlg = wx.MessageDialog(
-                    self, _("Scanner calibration has failed. "
-                            "Please check the pattern and the lasers and try again. "
-                            "Also you can set up the calibration's settings "
-                            "in the \"Adjustment workbench\" until the pattern "
-                            "and the lasers are detected correctly"),
-                    _("Calibration failed"), wx.OK | wx.ICON_ERROR)
+                    self, _('Scanner calibration has failed. '
+                            'Please check the pattern and the lasers and try again. '
+                            'Also you can set up the calibration\'s settings '
+                            'in the "Adjustment workbench" until the pattern '
+                            'and the lasers are detected correctly'),
+                    _('Calibration failed'), wx.OK | wx.ICON_ERROR)
                 dlg.ShowModal()
                 dlg.Destroy()
             self.skip_button.Enable()
@@ -166,10 +166,10 @@ class CalibrationPage(WizardPage):
         if ret:
             self.skip_button.Disable()
             self.next_button.Enable()
-            self.result_label.SetLabel(_("Success. Please press \"Next\" to continue"))
+            self.result_label.SetLabel(_('Success. Please press "Next" to continue'))
             dlg = wx.MessageDialog(
-                self, _("Scanner calibrated correctly"),
-                _("Success"), wx.OK | wx.ICON_INFORMATION)
+                self, _('Scanner calibrated correctly'),
+                _('Success'), wx.OK | wx.ICON_INFORMATION)
             dlg.ShowModal()
             dlg.Destroy()
         else:

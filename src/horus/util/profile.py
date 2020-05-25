@@ -87,7 +87,7 @@ class Settings(collections.MutableMapping):
             elif setting_type == np.ndarray:
                 value = np.asarray(value)
         except:
-            raise ValueError("Unable to cast setting %s to type %s" % (key, setting_type))
+            raise ValueError('Unable to cast setting %s to type %s' % (key, setting_type))
         else:
             self.get_setting(key).value = value
 
@@ -101,7 +101,7 @@ class Settings(collections.MutableMapping):
 
     def _load_json_dict(self, json_dict, categories):
         for category in list(json_dict.keys()):
-            if category == "settings_version":
+            if category == 'settings_version':
                 continue
             if categories is None or category in categories:
                 for key in json_dict[category]:
@@ -135,7 +135,7 @@ class Settings(collections.MutableMapping):
         else:
             json_dict = initial_json.copy()
 
-        json_dict["settings_version"] = self.settings_version
+        json_dict['settings_version'] = self.settings_version
         for key in list(self._settings_dict.keys()):
             if categories is not None and self.get_setting(key)._category not in categories:
                 continue
@@ -690,8 +690,8 @@ class Setting(object):
 
     def _check_type(self, value):
         if not isinstance(value, self._type):
-            raise TypeError("Error when setting %s.\n%s (%s) is not of type %s. "
-                            "Please remove current profile at ~/.horus" %
+            raise TypeError('Error when setting %s.\n%s (%s) is not of type %s. '
+                            'Please remove current profile at ~/.horus' %
                             (self._id, value, type(value), self._type))
 
     def _check_range(self, value):
@@ -763,17 +763,17 @@ def get_base_path():
     This depends on the used OS.
     """
     if system.is_windows():
-        basePath = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
+        basePath = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))
         # If we have a frozen python install, we need to step out of the library.zip
         if hasattr(sys, 'frozen'):
-            basePath = os.path.normpath(os.path.join(basePath, ".."))
+            basePath = os.path.normpath(os.path.join(basePath, '..'))
     else:
         basePath = os.path.expanduser('~/.horus/')
     if not os.path.isdir(basePath):
         try:
             os.makedirs(basePath)
         except:
-            logger.error("Failed to create directory: %s" % (basePath))
+            logger.error('Failed to create directory: %s' % (basePath))
     return basePath
 
 
@@ -788,12 +788,12 @@ def load_settings():
 # Returns a list of convex polygons, first polygon is the allowed area of the machine,
 # the rest of the polygons are the dis-allowed areas of the machine.
 def get_machine_size_polygons(machine_shape):
-    if machine_shape == "Circular":
+    if machine_shape == 'Circular':
         size = np.array(
             [settings['machine_diameter'],
              settings['machine_diameter'],
              settings['machine_height']], np.float32)
-    elif machine_shape == "Rectangular":
+    elif machine_shape == 'Rectangular':
         size = np.array([settings['machine_width'],
                          settings['machine_depth'],
                          settings['machine_height']], np.float32)

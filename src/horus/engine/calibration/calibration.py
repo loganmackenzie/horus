@@ -33,7 +33,7 @@ system = platform.system()
 class CalibrationCancel(Exception):
 
     def __init__(self):
-        Exception.__init__(self, "CalibrationCancel")
+        Exception.__init__(self, 'CalibrationCancel')
 
 
 class Calibration(object):

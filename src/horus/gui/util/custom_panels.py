@@ -68,7 +68,7 @@ class ExpandableCollection(wx.Panel):
 
 class ExpandablePanel(wx.Panel):
 
-    def __init__(self, parent, title="", selected_callback=None,
+    def __init__(self, parent, title='', selected_callback=None,
                  has_undo=True, has_restore=True, restore_callback=None):
         wx.Panel.__init__(self, parent, size=(-1, -1))
 
@@ -85,12 +85,12 @@ class ExpandablePanel(wx.Panel):
         if self.has_undo:
             self.undo_button = wx.BitmapButton(
                 self, wx.NewId(),
-                wx.Bitmap(resources.get_path_for_image("undo.png"), wx.BITMAP_TYPE_ANY))
+                wx.Bitmap(resources.get_path_for_image('undo.png'), wx.BITMAP_TYPE_ANY))
             self.undo_button.Disable()
         if self.has_restore:
             self.restore_button = wx.BitmapButton(
                 self, wx.NewId(),
-                wx.Bitmap(resources.get_path_for_image("restore.png"), wx.BITMAP_TYPE_ANY))
+                wx.Bitmap(resources.get_path_for_image('restore.png'), wx.BITMAP_TYPE_ANY))
 
         self.content = ControlCollection(self, self.append_undo, self.release_undo)
 
@@ -188,9 +188,9 @@ class ExpandablePanel(wx.Panel):
     def on_restore_button_clicked(self, event):
         dlg = wx.MessageDialog(
             self,
-            _("This will reset all section settings to defaults. "
-              "Unless you have saved your current profile, all section settings will be lost!\n"
-              "Do you really want to reset?"), self.title, wx.YES_NO | wx.ICON_QUESTION)
+            _('This will reset all section settings to defaults. '
+              'Unless you have saved your current profile, all section settings will be lost!\n'
+              'Do you really want to reset?'), self.title, wx.YES_NO | wx.ICON_QUESTION)
         result = dlg.ShowModal() == wx.ID_YES
         dlg.Destroy()
         if result:

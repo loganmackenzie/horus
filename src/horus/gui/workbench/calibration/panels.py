@@ -17,20 +17,20 @@ from horus.gui.util.custom_panels import ExpandablePanel, Slider, CheckBox, \
 class PatternSettings(ExpandablePanel):
 
     def __init__(self, parent, on_selected_callback):
-        ExpandablePanel.__init__(self, parent, _("Pattern settings"),
+        ExpandablePanel.__init__(self, parent, _('Pattern settings'),
                                  selected_callback=on_selected_callback)
 
     def add_controls(self):
         self.add_control(
-            'pattern_rows', Slider, _("Number of corner rows in the pattern"))
+            'pattern_rows', Slider, _('Number of corner rows in the pattern'))
         self.add_control(
-            'pattern_columns', Slider, _("Number of corner columns in the pattern"))
+            'pattern_columns', Slider, _('Number of corner columns in the pattern'))
         self.add_control(
-            'pattern_square_width', FloatTextBox, _("Square width in the pattern (mm)"))
+            'pattern_square_width', FloatTextBox, _('Square width in the pattern (mm)'))
         self.add_control(
             'pattern_origin_distance', FloatTextBox,
-            _("Minimum distance between the origin of the pattern (bottom-left corner) "
-              "and the pattern's base surface (mm)"))
+            _('Minimum distance between the origin of the pattern (bottom-left corner) '
+              'and the pattern\'s base surface (mm)'))
 
     def update_callbacks(self):
         self.update_callback('pattern_rows', lambda v: self._update_rows(v))
@@ -54,7 +54,7 @@ class PatternSettings(ExpandablePanel):
 class ScannerAutocheck(ExpandablePanel):
 
     def __init__(self, parent, on_selected_callback):
-        ExpandablePanel.__init__(self, parent, _("Scanner autocheck"),
+        ExpandablePanel.__init__(self, parent, _('Scanner autocheck'),
                                  selected_callback=on_selected_callback,
                                  has_undo=False, has_restore=False)
 
@@ -62,7 +62,7 @@ class ScannerAutocheck(ExpandablePanel):
 class LaserTriangulation(ExpandablePanel):
 
     def __init__(self, parent, on_selected_callback):
-        ExpandablePanel.__init__(self, parent, _("Laser triangulation"),
+        ExpandablePanel.__init__(self, parent, _('Laser triangulation'),
                                  selected_callback=on_selected_callback, has_undo=False)
 
     def add_controls(self):
@@ -75,7 +75,7 @@ class LaserTriangulation(ExpandablePanel):
 class PlatformExtrinsics(ExpandablePanel):
 
     def __init__(self, parent, on_selected_callback):
-        ExpandablePanel.__init__(self, parent, _("Platform extrinsics"),
+        ExpandablePanel.__init__(self, parent, _('Platform extrinsics'),
                                  selected_callback=on_selected_callback, has_undo=False)
 
     def add_controls(self):
@@ -86,21 +86,21 @@ class PlatformExtrinsics(ExpandablePanel):
 class VideoSettings(ExpandablePanel):
 
     def __init__(self, parent, on_selected_callback):
-        ExpandablePanel.__init__(self, parent, _("Video settings"),
+        ExpandablePanel.__init__(self, parent, _('Video settings'),
                                  selected_callback=on_selected_callback,
                                  has_undo=False, restore_callback=self._set_resolution)
 
     def add_controls(self):
-        self.add_control('camera_rotate', CheckBox, _("Rotate image"))
-        self.add_control('camera_hflip', CheckBox, _("Horizontal flip"))
-        self.add_control('camera_vflip', CheckBox, _("Vertical flip"))
+        self.add_control('camera_rotate', CheckBox, _('Rotate image'))
+        self.add_control('camera_hflip', CheckBox, _('Horizontal flip'))
+        self.add_control('camera_vflip', CheckBox, _('Vertical flip'))
         if sys.is_darwin():
-            self.add_control('camera_width', IntLabel, _("Width"))
-            self.add_control('camera_height', IntLabel, _("Height"))
+            self.add_control('camera_width', IntLabel, _('Width'))
+            self.add_control('camera_height', IntLabel, _('Height'))
         else:
-            self.add_control('camera_width', IntTextBox, _("Width"))
-            self.add_control('camera_height', IntTextBox, _("Height"))
-            self.add_control('set_resolution_button', Button, _("Set resolution"))
+            self.add_control('camera_width', IntTextBox, _('Width'))
+            self.add_control('camera_height', IntTextBox, _('Height'))
+            self.add_control('set_resolution_button', Button, _('Set resolution'))
 
     def update_callbacks(self):
         self.update_callback('camera_rotate', lambda v: driver.camera.set_rotate(v))
@@ -124,9 +124,9 @@ class VideoSettings(ExpandablePanel):
             if real_width != new_width or real_height != new_height:
                 dlg = wx.MessageDialog(
                     self,
-                    _("Your camera does not accept this resolution.\n"
-                      "Do you want to use the nearest values?"),
-                    _("Wrong resolution"), wx.YES_NO | wx.ICON_QUESTION)
+                    _('Your camera does not accept this resolution.\n'
+                      'Do you want to use the nearest values?'),
+                    _('Wrong resolution'), wx.YES_NO | wx.ICON_QUESTION)
                 result = dlg.ShowModal() == wx.ID_YES
                 dlg.Destroy()
                 if result:
@@ -142,7 +142,7 @@ class VideoSettings(ExpandablePanel):
 class CameraIntrinsics(ExpandablePanel):
 
     def __init__(self, parent, on_selected_callback):
-        ExpandablePanel.__init__(self, parent, _("Camera intrinsics"),
+        ExpandablePanel.__init__(self, parent, _('Camera intrinsics'),
                                  selected_callback=on_selected_callback, has_undo=False)
 
     def add_controls(self):
@@ -150,8 +150,8 @@ class CameraIntrinsics(ExpandablePanel):
         # self.add_control('distortion_vector', FloatTextBoxArray)
         # self.add_control(
         #     'use_distortion', CheckBox,
-        #     _("This option applies lens distortion correction to the video. "
-        #       "This process slows the video feed from the camera"))
+        #     _('This option applies lens distortion correction to the video. '
+        #       'This process slows the video feed from the camera'))
 
     def update_callbacks(self):
         self.update_callback('camera_matrix', lambda v: self._update_camera_matrix(v))

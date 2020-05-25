@@ -30,14 +30,14 @@ class ScanningWorkbench(Workbench):
 
         # Elements
         self.play_tool = self.toolbar_scan.AddLabelTool(
-            wx.NewId(), _("Play"),
-            wx.Bitmap(resources.get_path_for_image("play.png")), shortHelp=_("Play"))
+            wx.NewId(), _('Play'),
+            wx.Bitmap(resources.get_path_for_image('play.png')), shortHelp=_('Play'))
         self.stop_tool = self.toolbar_scan.AddLabelTool(
-            wx.NewId(), _("Stop"),
-            wx.Bitmap(resources.get_path_for_image("stop.png")), shortHelp=_("Stop"))
+            wx.NewId(), _('Stop'),
+            wx.Bitmap(resources.get_path_for_image('stop.png')), shortHelp=_('Stop'))
         self.pause_tool = self.toolbar_scan.AddLabelTool(
-            wx.NewId(), _("Pause"),
-            wx.Bitmap(resources.get_path_for_image("pause.png")), shortHelp=_("Pause"))
+            wx.NewId(), _('Pause'),
+            wx.Bitmap(resources.get_path_for_image('pause.png')), shortHelp=_('Pause'))
         self.toolbar_scan.Realize()
         self.toolbar_scan.GetParent().Layout()
 
@@ -182,36 +182,36 @@ class ScanningWorkbench(Workbench):
         else:
             if not calibration_data.check_calibration():
                 dlg = wx.MessageDialog(self,
-                                       _("Calibration parameters are not correct.\n"
-                                         "Please perform calibration process:\n"
-                                         "  1. Scanner autocheck\n"
-                                         "  2. Laser triangulation\n"
-                                         "  3. Platform extrinsics"),
-                                       _("Wrong calibration parameters"), wx.OK | wx.ICON_ERROR)
+                                       _('Calibration parameters are not correct.\n'
+                                         'Please perform calibration process:\n'
+                                         '  1. Scanner autocheck\n'
+                                         '  2. Laser triangulation\n'
+                                         '  3. Platform extrinsics'),
+                                       _('Wrong calibration parameters'), wx.OK | wx.ICON_ERROR)
                 dlg.ShowModal()
                 dlg.Destroy()
                 return
 
             if profile.settings['laser_triangulation_hash'] != calibration_data.md5_hash():
                 dlg = wx.MessageDialog(self,
-                                       _("Laser triangulation calibration has been performed \n"
-                                         "with different camera intrinsics values.\n"
-                                         "Please perform Laser triangulation calibration again:\n"
-                                         "  1. Scanner autocheck\n"
-                                         "  2. Laser triangulation"),
-                                       _("Wrong calibration parameters"), wx.OK | wx.ICON_ERROR)
+                                       _('Laser triangulation calibration has been performed \n'
+                                         'with different camera intrinsics values.\n'
+                                         'Please perform Laser triangulation calibration again:\n'
+                                         '  1. Scanner autocheck\n'
+                                         '  2. Laser triangulation'),
+                                       _('Wrong calibration parameters'), wx.OK | wx.ICON_ERROR)
                 dlg.ShowModal()
                 dlg.Destroy()
                 return
 
             if profile.settings['platform_extrinsics_hash'] != calibration_data.md5_hash():
                 dlg = wx.MessageDialog(self,
-                                       _("Platform extrinsics calibration has been performed \n"
-                                         "with different camera intrinsics values.\n"
-                                         "Please perform Platform extrinsics calibration again:\n"
-                                         "  1. Scanner autocheck\n"
-                                         "  2. Platform extrinsics"),
-                                       _("Wrong calibration parameters"), wx.OK | wx.ICON_ERROR)
+                                       _('Platform extrinsics calibration has been performed \n'
+                                         'with different camera intrinsics values.\n'
+                                         'Please perform Platform extrinsics calibration again:\n'
+                                         '  1. Scanner autocheck\n'
+                                         '  2. Platform extrinsics'),
+                                       _('Wrong calibration parameters'), wx.OK | wx.ICON_ERROR)
                 dlg.ShowModal()
                 dlg.Destroy()
                 return
@@ -219,9 +219,9 @@ class ScanningWorkbench(Workbench):
             result = True
             if self.scene_view._object is not None:
                 dlg = wx.MessageDialog(self,
-                                       _("Your current model will be deleted.\n"
-                                         "Are you sure you want to delete it?"),
-                                       _("Clear point cloud"), wx.YES_NO | wx.ICON_QUESTION)
+                                       _('Your current model will be deleted.\n'
+                                         'Are you sure you want to delete it?'),
+                                       _('Clear point cloud'), wx.YES_NO | wx.ICON_QUESTION)
                 result = dlg.ShowModal() == wx.ID_YES
                 dlg.Destroy()
             if result:
@@ -253,9 +253,9 @@ class ScanningWorkbench(Workbench):
         if ret:
             self.gauge.SetValue(self.gauge.GetRange())
             dlg = wx.MessageDialog(self,
-                                   _("Scanning has finished. If you want to save your "
-                                     "point cloud go to \"File > Save model\""),
-                                   _("Scanning finished!"), wx.OK | wx.ICON_INFORMATION)
+                                   _('Scanning has finished. If you want to save your '
+                                     'point cloud go to "File > Save model"'),
+                                   _('Scanning finished!'), wx.OK | wx.ICON_INFORMATION)
             dlg.ShowModal()
             dlg.Destroy()
             self.scanning = False
@@ -272,8 +272,8 @@ class ScanningWorkbench(Workbench):
                 driver.disconnect()
                 dlg = wx.MessageDialog(
                     self,
-                    "Low exposure values can cause a timing issue at the USB stack level on "
-                    "v4l2_ioctl function in VIDIOC_S_CTRL mode. This is a Logitech issue on Linux",
+                    'Low exposure values can cause a timing issue at the USB stack level on '
+                    'v4l2_ioctl function in VIDIOC_S_CTRL mode. This is a Logitech issue on Linux',
                     str(result), wx.OK | wx.ICON_ERROR)
                 dlg.ShowModal()
                 dlg.Destroy()
@@ -282,9 +282,9 @@ class ScanningWorkbench(Workbench):
         paused = ciclop_scan._inactive
         ciclop_scan.pause()
         dlg = wx.MessageDialog(self,
-                               _("Your current scanning will be stopped.\n"
-                                 "Are you sure you want to stop?"),
-                               _("Stop scanning"), wx.YES_NO | wx.ICON_QUESTION)
+                               _('Your current scanning will be stopped.\n'
+                                 'Are you sure you want to stop?'),
+                               _('Stop scanning'), wx.YES_NO | wx.ICON_QUESTION)
         result = dlg.ShowModal() == wx.ID_YES
         dlg.Destroy()
 

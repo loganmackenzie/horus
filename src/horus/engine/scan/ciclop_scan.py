@@ -26,7 +26,7 @@ system = platform.system()
 class ScanError(Exception):
 
     def __init__(self):
-        Exception.__init__(self, "Scan Error")
+        Exception.__init__(self, 'Scan Error')
 
 
 @Singleton
@@ -93,13 +93,13 @@ class CiclopScan(Scan):
         self._begin = time.time()
 
         # Setup console
-        logger.info("Start scan")
+        logger.info('Start scan')
         if self._debug and system == 'Linux':
-            string_time = str(datetime.datetime.now())[:-3] + " - "
-            print((string_time + " elapsed progress: 0 %"))
-            print((string_time + " elapsed time: 0' 0\""))
-            print((string_time + " elapsed angle: 0º"))
-            print((string_time + " capture: 0 ms"))
+            string_time = str(datetime.datetime.now())[:-3] + ' - '
+            print((string_time + ' elapsed progress: 0 %'))
+            print((string_time + ' elapsed time: 0\' 0"'))
+            print((string_time + ' elapsed angle: 0º'))
+            print((string_time + ' capture: 0 ms'))
 
         # Setup scanner
         self.driver.board.lasers_off()
@@ -151,15 +151,15 @@ class CiclopScan(Scan):
 
                     # Print info
                     self._end = time.time()
-                    string_time = str(datetime.datetime.now())[:-3] + " - "
+                    string_time = str(datetime.datetime.now())[:-3] + ' - '
 
                     if self._debug and system == 'Linux':
                         # Cursor up + remove lines
-                        print("\x1b[1A\x1b[1A\x1b[1A\x1b[1A\x1b[2K\x1b[1A")
-                        print((string_time + " elapsed progress: {0} %".format(int(self._theta / 3.6))))
-                        print((string_time + " elapsed time: {0}".format(time.strftime("%M' %S\"", time.gmtime(self._end - self._begin)))))
-                        print((string_time + " elapsed angle: {0}º".format(float(self._theta))))
-                        print((string_time + " capture: {0} ms".format(int((self._end - begin) * 1000))))
+                        print('\x1b[1A\x1b[1A\x1b[1A\x1b[1A\x1b[2K\x1b[1A')
+                        print((string_time + ' elapsed progress: {0} %'.format(int(self._theta / 3.6))))
+                        print((string_time + ' elapsed time: {0}'.format(time.strftime('%M\' %S"', time.gmtime(self._end - self._begin)))))
+                        print((string_time + ' elapsed angle: {0}º'.format(float(self._theta))))
+                        print((string_time + ' capture: {0} ms'.format(int((self._end - begin) * 1000))))
             # Sleep
             time.sleep(self._scan_sleep)
 
@@ -226,16 +226,16 @@ class CiclopScan(Scan):
 
         # Cursor down
         # if self._debug and system == 'Linux':
-        #     print("\x1b[1C")
+        #     print('\x1b[1C')
 
         self.image_capture.stream = True
 
         progress = 0
         if self._range > 0:
             progress = int(100 * self._progress / self._range)
-        logger.info("Finish scan {0} %  Time {1}".format(
+        logger.info('Finish scan {0} %  Time {1}'.format(
             progress,
-            time.strftime("%M' %S\"", time.gmtime(self._end - self._begin))))
+            time.strftime('%M\' %S"', time.gmtime(self._end - self._begin))))
 
         if self._after_callback is not None:
             self._after_callback(response)
@@ -284,4 +284,4 @@ class CiclopScan(Scan):
 
         # Print info
         """if self._debug and system == 'Linux':
-            print(string_time + " process: {0} ms".format(int((time.time() - begin) * 1000)))"""
+            print(string_time + ' process: {0} ms'.format(int((time.time() - begin) * 1000)))"""

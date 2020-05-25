@@ -249,17 +249,17 @@ class glGuiPanel(glcanvas.GLCanvas):
             # When an exception happens, catch it and show a message box.
             # If the exception is not caught the draw function bugs out.
             # Only show this exception once so we do not overload the user with popups.
-            errStr = _("An error occurred during the 3D view drawing.")
+            errStr = _('An error occurred during the 3D view drawing.')
             tb = traceback.extract_tb(sys.exc_info()[2])
-            errStr += "\n%s: '%s'" % (str(sys.exc_info()[0].__name__), str(sys.exc_info()[1]))
+            errStr += '\n%s: \'%s\'' % (str(sys.exc_info()[0].__name__), str(sys.exc_info()[1]))
             for n in range(len(tb) - 1, -1, -1):
                 locationInfo = tb[n]
-                errStr += "\n @ %s:%s:%d" % (
+                errStr += '\n @ %s:%s:%d' % (
                     os.path.basename(locationInfo[0]), locationInfo[2], locationInfo[1])
             if not self._shown_error:
                 traceback.print_exc()
                 wx.CallAfter(
-                    wx.MessageBox, errStr, _("3D window error"), wx.OK | wx.ICON_EXCLAMATION)
+                    wx.MessageBox, errStr, _('3D window error'), wx.OK | wx.ICON_EXCLAMATION)
                 self._shown_error = True
 
     def _draw_gui(self):

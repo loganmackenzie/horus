@@ -27,7 +27,7 @@ class WelcomeDialog(wx.Dialog):
         header = Header(self)
         content = Content(self)
         check_box_show = wx.CheckBox(
-            self, label=_("Don't show this dialog again"), style=wx.ALIGN_LEFT)
+            self, label=_('Don\'t show this dialog again'), style=wx.ALIGN_LEFT)
         check_box_show.SetValue(not profile.settings['show_welcome'])
 
         # Layout
@@ -62,8 +62,8 @@ class Header(wx.Panel):
 
         # Elements
         logo = ImageView(self)
-        logo.set_image(wx.Image(resources.get_path_for_image("logo.png")))
-        title_text = wx.StaticText(self, label=_("3D scanning for everyone"))
+        logo.set_image(wx.Image(resources.get_path_for_image('logo.png')))
+        title_text = wx.StaticText(self, label=_('3D scanning for everyone'))
         title_font = title_text.GetFont()
         title_font.SetPointSize(14)
         title_text.SetFont(title_font)
@@ -85,12 +85,12 @@ class CreateNew(wx.Panel):
         wx.Panel.__init__(self, parent)
 
         # Elements
-        title_text = wx.StaticText(self, label=_("Create new"))
-        wizard_button = wx.Button(self, label=_("Wizard mode (step by step)"))
-        scan_button = wx.Button(self, label=_("Scan using recent settings"))
-        # advanced_control_button = wx.Button(self, label=_("Advanced control"))
-        advanced_adjustment_button = wx.Button(self, label=_("Advanced adjustment"))
-        advanced_calibration_button = wx.Button(self, label=_("Advanced calibration"))
+        title_text = wx.StaticText(self, label=_('Create new'))
+        wizard_button = wx.Button(self, label=_('Wizard mode (step by step)'))
+        scan_button = wx.Button(self, label=_('Scan using recent settings'))
+        # advanced_control_button = wx.Button(self, label=_('Advanced control'))
+        advanced_adjustment_button = wx.Button(self, label=_('Advanced adjustment'))
+        advanced_calibration_button = wx.Button(self, label=_('Advanced calibration'))
 
         # Layout
         vbox = wx.BoxSizer(wx.VERTICAL)
@@ -151,7 +151,7 @@ class OpenRecent(wx.Panel):
         wx.Panel.__init__(self, parent)
 
         # Elements
-        title_text = wx.StaticText(self, label=_("Open recent file"))
+        title_text = wx.StaticText(self, label=_('Open recent file'))
 
         lastFiles = profile.settings['last_files']
         lastFiles.reverse()

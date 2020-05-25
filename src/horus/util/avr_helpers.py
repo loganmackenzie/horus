@@ -21,27 +21,27 @@ class AvrError(Exception):
 
 class AvrDude(object):
 
-    def __init__(self, protocol="arduino", microcontroller="atmega328p",
-                 baud_rate="19200", port=None):
+    def __init__(self, protocol='arduino', microcontroller='atmega328p',
+                 baud_rate='19200', port=None):
         self.protocol = protocol
         self.microcontroller = microcontroller
         self.baud_rate = baud_rate
 
         if sys.is_windows():
-            self.avrdude = os.path.abspath(resources.get_path_for_tools("avrdude.exe"))
+            self.avrdude = os.path.abspath(resources.get_path_for_tools('avrdude.exe'))
         elif sys.is_darwin():
-            self.avrdude = os.path.abspath(resources.get_path_for_tools("avrdude"))
+            self.avrdude = os.path.abspath(resources.get_path_for_tools('avrdude'))
         else:
             try:
-                Popen(["avrdude"], stdout=PIPE, stderr=STDOUT)
-                self.avrdude = "avrdude"
+                Popen(['avrdude'], stdout=PIPE, stderr=STDOUT)
+                self.avrdude = 'avrdude'
             except:
                 self.avrdude = None
 
         if self.avrdude is None:
             raise AvrError('avrdude not installed')
 
-        self.avrconf = os.path.abspath(resources.get_path_for_tools("avrdude.conf"))
+        self.avrconf = os.path.abspath(resources.get_path_for_tools('avrdude.conf'))
         self.port = port
 
     def _run_command(self, flags=[], callback=None):
@@ -63,9 +63,9 @@ class AvrDude(object):
 
     def flash(self, hex_path=None, clear_eeprom=False, callback=None):
         if hex_path is None:
-            hex_path = resources.get_path_for_firmware("horus-fw.hex")
+            hex_path = resources.get_path_for_firmware('horus-fw.hex')
         if clear_eeprom:
-            hex_path = resources.get_path_for_firmware("eeprom_clear.hex")
+            hex_path = resources.get_path_for_firmware('eeprom_clear.hex')
         flags = ['-C', '%(avrconf)s', '-c', self.protocol, '-p', self.microcontroller,
                  '-P', '%s' % self.port, '-b', str(self.baud_rate), '-D', '-U',
                  'flash:w:%s' % os.path.basename(hex_path)]

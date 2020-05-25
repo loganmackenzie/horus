@@ -296,7 +296,7 @@ class SceneView(opengl_gui.glGuiPanel):
                     menu = wx.Menu()
                     if self._object is not None:
                         self.Bind(
-                            wx.EVT_MENU, self.on_delete_object, menu.Append(-1, _("Delete object")))
+                            wx.EVT_MENU, self.on_delete_object, menu.Append(-1, _('Delete object')))
                     if menu.MenuItemCount > 0:
                         self.PopupMenu(menu)
                     menu.Destroy()
@@ -311,8 +311,8 @@ class SceneView(opengl_gui.glGuiPanel):
     def on_delete_object(self, event):
         if self._object is not None:
             dlg = wx.MessageDialog(
-                self, _("Your current model will be deleted.\nAre you sure you want to delete it?"),
-                _("Clear point cloud"), wx.YES_NO | wx.ICON_QUESTION)
+                self, _('Your current model will be deleted.\nAre you sure you want to delete it?'),
+                _('Clear point cloud'), wx.YES_NO | wx.ICON_QUESTION)
             result = dlg.ShowModal() == wx.ID_YES
             dlg.Destroy()
             if result:
@@ -526,7 +526,7 @@ class SceneView(opengl_gui.glGuiPanel):
             #                  self._mouse_y, 1, 1, GL_RGBA, GL_UNSIGNED_INT_8_8_8_8)[0][0] >> 8
             f = glReadPixels(self._mouse_x, self.GetSize().GetHeight() - 1 -
                              self._mouse_y, 1, 1, GL_DEPTH_COMPONENT, GL_FLOAT)[0][0]
-            # self.GetTopLevelParent().SetTitle(hex(n) + " " + str(f))
+            # self.GetTopLevelParent().SetTitle(hex(n) + ' ' + str(f))
             self._mouse_3d_pos = opengl_helpers.unproject(
                 self._mouse_x, self._viewport[1] + self._viewport[3] - self._mouse_y,
                 f, self._model_matrix, self._proj_matrix, self._viewport)
@@ -687,7 +687,7 @@ class SceneView(opengl_gui.glGuiPanel):
             gluCylinder(quadric, 6, 6, 1, 32, 16)
             glTranslate(0, 0, -height + 1)
 
-        polys = profile.get_machine_size_polygons(profile.settings["machine_shape"])
+        polys = profile.get_machine_size_polygons(profile.settings['machine_shape'])
 
         # Draw checkerboard
         if self._platform_texture is None:
@@ -715,7 +715,7 @@ class ShaderEditor(wx.Dialog):
 
     def __init__(self, parent, callback, v, f):
         super(ShaderEditor, self).__init__(
-            parent, title="Shader editor", style=wx.DEFAULT_DIALOG_STYLE | wx.RESIZE_BORDER)
+            parent, title='Shader editor', style=wx.DEFAULT_DIALOG_STYLE | wx.RESIZE_BORDER)
         self._callback = callback
         s = wx.BoxSizer(wx.VERTICAL)
         self.SetSizer(s)

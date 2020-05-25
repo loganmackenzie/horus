@@ -21,17 +21,17 @@ class VideoPage(Page):
     def __init__(self, parent, title='Video page', start_callback=None, cancel_callback=None):
         Page.__init__(self, parent,
                       title=title,
-                      desc=_("Put the pattern on the platform as shown in the "
-                             "picture and press \"Start\""),
-                      left=_("Cancel"),
-                      right=_("Start"),
+                      desc=_('Put the pattern on the platform as shown in the '
+                             'picture and press "Start"'),
+                      left=_('Cancel'),
+                      right=_('Start'),
                       button_left_callback=cancel_callback,
                       button_right_callback=start_callback,
                       view_progress=True)
 
         # Elements
         image_view = ImageView(self.panel, quality=wx.IMAGE_QUALITY_HIGH)
-        image_view.set_image(wx.Image(resources.get_path_for_image("pattern-position.png")))
+        image_view.set_image(wx.Image(resources.get_path_for_image('pattern-position.png')))
         self.video_view = VideoView(self.panel, self.get_image)
 
         # Layout
