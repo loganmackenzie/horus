@@ -77,7 +77,7 @@ class SceneView(opengl_gui.glGuiPanel):
     def __del__(self):
         if self._object_shader is not None:
             self._object_shader.release()
-        if self._object_shader_no_light is not None:
+        if hasattr(self, '_object_shader_no_light') and self._object_shader_no_light is not None:
             self._object_shader_no_light.release()
         if self._object_load_shader is not None:
             self._object_load_shader.release()

@@ -77,7 +77,7 @@ class Board(object):
             self._serial_port = serial.Serial(self.serial_name, self.baud_rate, timeout=2)
             if self._serial_port.isOpen():
                 self._reset()  # Force Reset and flush
-                version = self._serial_port.readline()
+                version = self._serial_port.readline().decode('utf-8')
                 if "Horus 0.1 ['$' for help]" in version:
                     raise OldFirmware()
                 elif "Horus 0.2 ['$' for help]" in version:
@@ -92,7 +92,7 @@ class Board(object):
             else:
                 raise BoardNotConnected()
         except Exception as exception:
-            logger.error('Error opening the port {0}\n'.format(self.serial_name))
+            logger.error('Error opening the port {0} due to error {1}\n'.format(self.serial_name, exception))
             self._serial_port = None
             raise exception
 
@@ -203,12 +203,13 @@ class Board(object):
                 try:
                     self._serial_port.flushInput()
                     self._serial_port.flushOutput()
-                    self._serial_port.write(req + '\r\n')
+                    self._serial_port.write(f'{req}\r\n'.encode('utf-8'))
                     while req != '~' and req != '!' and ret == '':
                         ret = self.read(read_lines)
                         time.sleep(0.01)
                     self._success()
-                except:
+                except Exception as err:
+                    logger.debug(f'Sending serial command to board failed due to error: {err}')
                     if hasattr(self, '_serial_port'):
                         if callback is not None:
                             callback(ret)
@@ -219,9 +220,9 @@ class Board(object):
 
     def read(self, read_lines=False):
         if read_lines:
-            return ''.join(self._serial_port.readlines())
+            return ''.join(map(lambda line: line.decode('utf-8'), self._serial_port.readlines()))
         else:
-            return ''.join(self._serial_port.readline())
+            return self._serial_port.readline().decode('utf-8')
 
     def _success(self):
         self._tries = 0
@@ -232,16 +233,14 @@ class Board(object):
             self._tries += 1
             if self._tries >= 3:
                 self._tries = 0
-                if self.unplug_callback is not None and \
-                   self.parent is not None and \
-                   not self.parent.unplugged:
+                if self.unplug_callback is not None and self.parent is not None and not self.parent.unplugged:
                     self.parent.unplugged = True
                     self.unplug_callback()
 
     def _reset(self):
         self._serial_port.flushInput()
         self._serial_port.flushOutput()
-        self._serial_port.write('\x18\r\n')  # Ctrl-x
+        self._serial_port.write(b'\x18\r\n')  # Ctrl-x
         self._serial_port.readline()
 
     def get_serial_list(self):
